@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerConnect Portal - Discover Your Interest. Choose Your Career.</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="brand" onclick="App.navigateTo('home')">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>CareerConnect Portal</h1>
+          <p>Discover Your Interest. Choose Your Career.</p>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#" class="nav-link active" data-view="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-view="wizard">Career Journey</a></li>
+          <li><a href="#" class="nav-link" data-view="recommendations">Recommendations</a></li>
+          <li><a href="#" class="nav-link" data-view="explore">Explore Careers</a></li>
+          <li><a href="#" class="nav-link" data-view="compare">Compare</a></li>
+          <li><a href="#" class="nav-link" data-view="dashboard">My Dashboard</a></li>
+          <li><a href="#" class="nav-link" data-view="report">Career Report</a></li>
+          <li><a href="#" class="nav-link" data-view="assistant">Career Assistant</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-offline-badge" title="Running 100% locally. Zero internet connection required.">
+        <span class="offline-dot"></span>
+        <span>100% Offline</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="container">
+
+    <!-- =======================================================================
+         VIEW 1: HOME PAGE (Step 1)
+         ======================================================================= -->
+    <section id="view-home" class="view-section active">
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Guidance for 10th, 11th & 12th Standard Students</span>
+          </div>
+          <h1 class="hero-title">Discover Your Interest.<br>Choose Your Career.</h1>
+          <p class="hero-tagline">What to study, which stream to choose, and how to reach your dream job.</p>
+          <p class="hero-description">
+            CareerConnect Portal provides friendly, structured, step-by-step career guidance designed specifically for high school students. Discover career pathways aligned with your natural strengths, learn about college degrees and entrance exams in India, and follow actionable learning roadmaps.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-lg hero-btn-primary" onclick="App.navigateTo('wizard')">
+              Start Your Career Journey
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <button class="btn btn-lg hero-btn-secondary" onclick="App.navigateTo('explore')">
+              Explore 40+ Careers
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Highlights -->
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <h4>Step-by-Step Discovery</h4>
+          <p>No lengthy or confusing tests. Answer 5 simple questions to uncover where your strengths naturally shine.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Weighted Matching Algorithm</h4>
+          <p>Scientific matching scores calculate compatibility across academic streams, favorite subjects, and core interests.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h4>Interactive Roadmaps</h4>
+          <p>Clear milestones from 12th standard graduation to your first job with trackable checklists saved locally.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+          </div>
+          <h4>Offline Career Assistant</h4>
+          <p>Instant answers to queries about streams after 10th, entrance exams (NEET, JEE, CLAT, NDA), and degrees.</p>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="about-banner">
+        <h3>About CareerConnect Portal</h3>
+        <p>
+          Choosing a career path is one of the most critical decisions school students make. Many students feel overwhelmed by conflicting advice, complex eligibility criteria, or lack of reliable guidance. CareerConnect Portal provides high school students with straightforward, transparent career insights—including realistic indicative salaries, course durations, and entrance examination roadmaps in India.
+        </p>
+        <p class="text-muted mt-2" style="font-size: 0.88rem;">
+          🔒 <strong>100% Offline Commitment:</strong> This application functions entirely on your laptop without requiring an internet connection or transmitting your data externally.
+        </p>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 2: STUDENT WORKFLOW WIZARD (Steps 2 to 5)
+         ======================================================================= -->
+    <section id="view-wizard" class="view-section">
+      <div class="wizard-wrapper">
+
+        <!-- Stepper Nodes Header -->
+        <div class="wizard-stepper">
+          <div class="step-node active" id="step-node-2" onclick="App.showWizardStep(2)">
+            <div class="step-circle">1</div>
+            <div class="step-label">Basic Details</div>
+          </div>
+          <div class="step-node" id="step-node-3" onclick="App.showWizardStep(3)">
+            <div class="step-circle">2</div>
+            <div class="step-label">Interests</div>
+          </div>
+          <div class="step-node" id="step-node-4" onclick="App.showWizardStep(4)">
+            <div class="step-circle">3</div>
+            <div class="step-label">Skills</div>
+          </div>
+          <div class="step-node" id="step-node-5" onclick="App.showWizardStep(5)">
+            <div class="step-circle">4</div>
+            <div class="step-label">Assessment</div>
+          </div>
+          <div class="step-node" id="step-node-6" onclick="App.navigateTo('recommendations')">
+            <div class="step-circle">5</div>
+            <div class="step-label">Recommendations</div>
+          </div>
+        </div>
+
+        <!-- STEP 2: BASIC DETAILS -->
+        <div id="wizard-step-2" class="step-card">
+          <div class="step-header">
+            <h2>Tell Us About Yourself</h2>
+            <p>We ask only a few basic details to suggest suitable careers and streams.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="student-name">Your Full Name</label>
+            <input type="text" id="student-name" class="form-control" placeholder="e.g. Rahul Sharma" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Current Class / Standard</label>
+            <div class="radio-group-cards">
+              <label class="selectable-card" style="padding: 0.75rem;">
+                <input type="radio" name="student-class" value="10th" checked style="margin-bottom:0.25rem;">
+                <span class="selectable-card-title">10th Standard</span>
+              </label>
+              <label class="selectable-card" style="padding: 0.75rem;">
+                <input type="radio" name="student-class" value="11th" style="margin-bottom:0.25rem;">
+                <span class="selectable-card-title">11th Standard</span>
+              </label>
+              <label class="selectable-card" style="padding: 0.75rem;">
+                <input type="radio" name="student-class" value="12th" style="margin-bottom:0.25rem;">
+                <span class="selectable-card-title">12th Standard</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="academic-group">Academic Stream / Group</label>
+            <select id="academic-group" class="form-control">
+              <option value="general">General / Not Yet Decided (For 10th Standard)</option>
+              <option value="science-pcm">Science with Mathematics (PCM - Physics, Chemistry, Maths)</option>
+              <option value="science-pcb">Science with Biology (PCB - Physics, Chemistry, Biology)</option>
+              <option value="science-pcmb">Science with PCMB (Maths & Biology)</option>
+              <option value="commerce-maths">Commerce with Mathematics</option>
+              <option value="commerce">Commerce without Mathematics</option>
+              <option value="arts">Arts / Humanities</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="student-marks">Recent Examination Score or Percentage <span class="optional">(Optional)</span></label>
+            <input type="number" id="student-marks" class="form-control" placeholder="e.g. 85" min="30" max="100">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Favourite Subjects <span class="optional">(Click to select what you enjoy studying)</span></label>
+            <div class="chips-grid" id="subjects-chips-container">
+              <!-- Dynamically populated via App.renderSubjectsSelectionGrid() -->
+            </div>
+          </div>
+
+          <div class="wizard-footer">
+            <button class="btn btn-secondary" onclick="App.navigateTo('home')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Home
+            </button>
+            <button class="btn btn-primary" onclick="App.nextWizardStep()">
+              Next: Select Interests
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: INTEREST SELECTION -->
+        <div id="wizard-step-3" class="step-card" style="display: none;">
+          <div class="step-header">
+            <h2>Select Your Interests</h2>
+            <p>Which fields spark your curiosity? Choose a maximum of three interests.</p>
+          </div>
+
+          <div class="selection-counter">
+            <span>Interest Selection</span>
+            <span id="interest-counter-badge" class="badge badge-primary">0 of 3 selected</span>
+          </div>
+
+          <div class="interest-cards-grid" id="interests-grid-container">
+            <!-- Dynamically populated via App.renderInterestsSelectionGrid() -->
+          </div>
+
+          <div class="wizard-footer mt-4">
+            <button class="btn btn-secondary" onclick="App.prevWizardStep()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Previous: Basic Details
+            </button>
+            <button class="btn btn-primary" onclick="App.nextWizardStep()">
+              Next: Select Skills
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: SKILLS SELECTION -->
+        <div id="wizard-step-4" class="step-card" style="display: none;">
+          <div class="step-header">
+            <h2>What Are Your Core Strengths?</h2>
+            <p>Select the skills and abilities that you feel most confident in (select multiple).</p>
+          </div>
+
+          <div class="chips-grid" id="skills-chips-container" style="justify-content: center; padding: 1.5rem 0;">
+            <!-- Dynamically populated via App.renderSkillsSelectionGrid() -->
+          </div>
+
+          <div class="wizard-footer mt-4">
+            <button class="btn btn-secondary" onclick="App.prevWizardStep()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Previous: Interests
+            </button>
+            <button class="btn btn-primary" onclick="App.nextWizardStep()">
+              Next: 5-Question Assessment
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 5: SHORT ASSESSMENT (5 SIMPLE QUESTIONS) -->
+        <div id="wizard-step-5" class="step-card" style="display: none;">
+          <div class="assessment-container">
+            <!-- Progress Bar -->
+            <div class="assessment-progress-bar-wrap">
+              <div class="progress-header">
+                <span id="question-progress-label">Question 1 of 5</span>
+                <span>Short Strength Assessment</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="question-progress-fill" style="width: 20%;"></div>
+              </div>
+            </div>
+
+            <!-- Question Content -->
+            <div class="question-block">
+              <span class="question-badge" id="q-category-badge">Work Environment</span>
+              <h3 class="question-text" id="q-text">Which type of day-to-day work environment would energize you the most?</h3>
+            </div>
+
+            <!-- Options (A to E) -->
+            <div class="options-list" id="q-options-container">
+              <!-- Dynamically populated via App.renderQuestionCard() -->
+            </div>
+
+            <div class="wizard-footer">
+              <button class="btn btn-secondary" onclick="App.prevWizardStep()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Previous
+              </button>
+              <button class="btn btn-primary" id="btn-q-next" onclick="App.nextWizardStep()">
+                Next Question
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 3: RECOMMENDATIONS (Step 6)
+         ======================================================================= -->
+    <section id="view-recommendations" class="view-section">
+      <div class="recs-header-banner">
+        <div class="recs-header-text">
+          <h2>Your Top Career Recommendations</h2>
+          <p id="recs-sub-title">Calculated using our offline weighted algorithm matching your stream, interests, and strengths.</p>
+        </div>
+        <div class="recs-header-actions">
+          <button class="btn btn-secondary" onclick="App.navigateTo('wizard')">
+            Retake Assessment
+          </button>
+          <button class="btn hero-btn-primary" onclick="App.navigateTo('report')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+            View Career Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Empty State if no assessment yet -->
+      <div id="recs-empty-state" class="empty-state" style="display: none;">
+        <div class="empty-state-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>No Assessment Results Yet</h3>
+        <p>Complete the quick 4-step career journey to see your top five personalized career matches.</p>
+        <button class="btn btn-primary" onclick="App.navigateTo('wizard')">Start Career Journey</button>
+      </div>
+
+      <!-- Top 5 Recommendation Cards -->
+      <div class="recs-list" id="recommendations-list">
+        <!-- Dynamically populated via App.renderRecommendationsView() -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 4: EXPLORE ALL 40+ CAREERS
+         ======================================================================= -->
+    <section id="view-explore" class="view-section">
+      <div class="step-header" style="text-align: left; margin-bottom: 1.5rem;">
+        <h2>Explore Career Database</h2>
+        <p>Browse through all 40+ high-demand careers across technology, engineering, healthcare, commerce, design, and public service.</p>
+      </div>
+
+      <!-- Controls & Search -->
+      <div class="explore-controls-card">
+        <div class="search-input-wrapper">
+          <span class="search-icon-inside">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" id="career-search-input" class="search-input" placeholder="Search by career title, category, skills, entrance exams (e.g., 'Software', 'NEET', 'Pilot', 'Design')...">
+          <span id="search-clear" class="search-clear-btn" onclick="App.clearSearch()">✕</span>
+        </div>
+
+        <div class="category-chips-scroll" id="category-chips-container">
+          <!-- Dynamically populated category chips -->
+        </div>
+
+        <div class="filters-row">
+          <div class="filters-group">
+            <label style="font-size:0.85rem; font-weight:600;">Stream Compatibility:</label>
+            <select id="explore-stream-filter" class="filter-select" onchange="App.renderExploreCareers()">
+              <option value="all">All Academic Streams</option>
+              <option value="science-pcm">Science (PCM)</option>
+              <option value="science-pcb">Science (PCB)</option>
+              <option value="commerce-maths">Commerce with Maths</option>
+              <option value="commerce">Commerce</option>
+              <option value="arts">Arts / Humanities</option>
+            </select>
+          </div>
+
+          <div class="filters-group">
+            <label style="font-size:0.85rem; font-weight:600;">Sort By:</label>
+            <select id="explore-sort-filter" class="filter-select" onchange="App.renderExploreCareers()">
+              <option value="title">Alphabetical (A to Z)</option>
+              <option value="category">Category</option>
+            </select>
+          </div>
+
+          <span class="badge badge-primary" id="explore-count-badge">Showing 46 careers</span>
+        </div>
+      </div>
+
+      <!-- Careers Grid -->
+      <div class="careers-grid" id="explore-careers-grid">
+        <!-- Dynamically populated via App.renderExploreCareers() -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 5: CAREER COMPARISON
+         ======================================================================= -->
+    <section id="view-compare" class="view-section">
+      <div class="step-header" style="text-align: left; margin-bottom: 1.5rem;">
+        <h2>Compare Two Careers Side-by-Side</h2>
+        <p>Analyze eligibility criteria, entrance examinations, course duration, skills, and salaries to make an informed choice.</p>
+      </div>
+
+      <div class="card comparison-selectors">
+        <div>
+          <label class="form-label">Select First Career:</label>
+          <select id="compare-select-1" class="form-control" onchange="App.renderComparisonView()"></select>
+        </div>
+        <div>
+          <label class="form-label">Select Second Career:</label>
+          <select id="compare-select-2" class="form-control" onchange="App.renderComparisonView()"></select>
+        </div>
+      </div>
+
+      <div id="comparison-table-container">
+        <!-- Rendered via CareerComparison.renderComparisonTable -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 6: STUDENT DASHBOARD
+         ======================================================================= -->
+    <section id="view-dashboard" class="view-section">
+      <div class="dashboard-grid">
+
+        <!-- Left: Student Profile Card -->
+        <div class="student-profile-widget">
+          <div class="avatar-circle" id="dash-avatar-initial">S</div>
+          <h3 class="text-center" id="dash-student-name">Student Name</h3>
+          <p class="text-center text-muted" id="dash-student-class">10th Standard</p>
+
+          <div class="dashboard-stats-row">
+            <div class="dash-stat-box">
+              <div class="dash-stat-num" id="dash-stat-recs">0</div>
+              <div class="dash-stat-lbl">Top Matches</div>
+            </div>
+            <div class="dash-stat-box">
+              <div class="dash-stat-num" id="dash-stat-saved">0</div>
+              <div class="dash-stat-lbl">Bookmarked</div>
+            </div>
+          </div>
+
+          <div class="mt-2" style="font-size: 0.88rem;">
+            <p><strong>Stream:</strong> <span id="dash-student-group">General</span></p>
+            <p class="mt-1"><strong>Last Score:</strong> <span id="dash-student-marks">Not provided</span></p>
+          </div>
+
+          <div class="mt-4 d-flex flex-column gap-2">
+            <button class="btn btn-sm btn-primary" onclick="App.navigateTo('wizard')">Retake Assessment</button>
+            <button class="btn btn-sm btn-outline-primary" onclick="App.navigateTo('report')">View Printable Report</button>
+          </div>
+        </div>
+
+        <!-- Right: Dashboard Details -->
+        <div>
+          <!-- Recommendations Section -->
+          <div class="dash-section-card">
+            <div class="d-flex align-center justify-between mb-3">
+              <h3>Top Career Recommendations</h3>
+              <button class="btn btn-sm btn-outline-primary" onclick="App.navigateTo('recommendations')">View All</button>
+            </div>
+            <div id="dash-recs-snippet">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Roadmap Progress -->
+          <div class="dash-section-card">
+            <h3>Learning Roadmap Progress Tracker</h3>
+            <p class="text-muted" style="font-size:0.88rem; margin-bottom: 1rem;">Track steps you have completed toward your career goals:</p>
+            <div id="dash-roadmap-snippet">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Bookmarked Careers -->
+          <div class="dash-section-card">
+            <div class="d-flex align-center justify-between mb-3">
+              <h3>My Saved Careers</h3>
+              <button class="btn btn-sm btn-outline-primary" onclick="App.navigateTo('explore')">Browse More</button>
+            </div>
+            <div id="dash-saved-snippet">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 7: CAREER GUIDANCE REPORT (Printable)
+         ======================================================================= -->
+    <section id="view-report" class="view-section">
+      <div class="report-actions-bar d-flex justify-between align-center mb-3">
+        <button class="btn btn-secondary" onclick="App.navigateTo('dashboard')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Dashboard
+        </button>
+        <button class="btn btn-primary" onclick="App.printReport()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print / Save as PDF
+        </button>
+      </div>
+
+      <div class="report-view-card" id="report-content-container">
+        <!-- Rendered via CareerReport.generateReportHTML() -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         VIEW 8: OFFLINE CAREER ASSISTANT (CHAT)
+         ======================================================================= -->
+    <section id="view-assistant" class="view-section">
+      <div class="assistant-card">
+        <div class="assistant-header">
+          <div class="assistant-title-group">
+            <div class="assistant-avatar">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.37 2.07 6.26 5 7.46V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.54c2.93-1.2 5-4.09 5-7.46a8 8 0 0 0-8-8z"/></svg>
+            </div>
+            <div>
+              <h3 style="color:#FFF; font-size:1.15rem; margin:0;">Offline Career Assistant</h3>
+              <p style="color:#DBEAFE; font-size:0.75rem; margin:0;">Predefined guidance based on Indian education systems</p>
+            </div>
+          </div>
+          <span class="assistant-badge">100% Local (Zero Cloud)</span>
+        </div>
+
+        <div class="chat-history" id="assistant-chat-history">
+          <!-- Chat messages rendered dynamically -->
+        </div>
+
+        <!-- Suggestion Chips Bar -->
+        <div class="assistant-suggestions-bar" id="assistant-suggestions-bar">
+          <!-- Quick FAQ chips -->
+        </div>
+
+        <div class="assistant-input-box">
+          <input type="text" id="assistant-user-input" class="chat-input" placeholder="Ask a question (e.g. 'Which stream after 10th?', 'How to become a pilot?')...">
+          <button class="btn btn-primary" onclick="App.submitAssistantMessage()">
+            <span>Ask</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =======================================================================
+       CAREER DETAILS MODAL (10 SECTIONS)
+       ======================================================================= -->
+  <div class="modal-overlay" id="career-details-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <span class="badge badge-primary mb-1" id="modal-career-category">Category</span>
+          <h2 id="modal-career-title">Career Title</h2>
+        </div>
+        <div class="d-flex align-center gap-2">
+          <button class="btn-bookmark" id="modal-bookmark-btn" title="Bookmark career">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <div class="modal-close-btn" onclick="App.closeCareerDetails()" title="Close dialog">✕</div>
+        </div>
+      </div>
+      <div class="modal-body" id="modal-career-body">
+        <!-- 10 Sections populated via App.openCareerDetails() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Alerts Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h4>CareerConnect Portal</h4>
+        <p>Discover Your Interest. Choose Your Career.</p>
+      </div>
+      <div class="footer-note">
+        <p>100% Offline Career Guidance Application • Designed for 10th, 11th & 12th Standard Students</p>
+        <p>All data and progress stored securely in your browser's local storage.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 100% Offline Scripts (strictly local, zero CDN) -->
+  <script src="js/careers-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/recommendation-engine.js"></script>
+  <script src="js/assistant.js"></script>
+  <script src="js/comparison.js"></script>
+  <script src="js/report.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

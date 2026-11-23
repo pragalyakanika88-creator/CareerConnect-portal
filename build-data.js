@@ -1,0 +1,1848 @@
+const fs = require('fs');
+const path = require('path');
+
+const careers = [
+  {
+    id: "software-engineer",
+    title: "Software Engineer / Developer",
+    category: "Technology",
+    shortDescription: "Designs, codes, tests, and maintains software applications, algorithms, and systems powering modern tech products.",
+    whySuits: "Ideal if you enjoy logical problem-solving, building digital tools, coding, and continuous hands-on technical learning.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics (PCM). Minimum 50-60% aggregate.",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "Bachelor's Degree (B.Tech / B.E. in CSE/IT, or BCA followed by MCA)",
+    courseOptions: [
+      "B.Tech in Computer Science & Engineering (CSE)",
+      "B.Tech in Information Technology (IT)",
+      "BCA (Bachelor of Computer Applications)",
+      "B.Sc in Computer Science"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["JEE Main", "JEE Advanced", "BITSAT", "State CETs (MHT-CET, KCET, WBJEE, etc.)", "VITEEE"],
+    requiredSkills: ["Problem-solving", "Logical thinking", "Computer knowledge", "Mathematics", "Analytical thinking"],
+    favouriteSubjects: ["Computer Science", "Mathematics", "Physics"],
+    interests: ["Technology", "Engineering"],
+    jobOpportunities: [
+      "Frontend / Backend Developer",
+      "Software Development Engineer (SDE) at Tech Companies",
+      "Systems Architect",
+      "Application Developer at Global IT Consulting Firms"
+    ],
+    salaryFresher: "₹4.5 - ₹9.0 LPA (Indicative)",
+    salaryExperienced: "₹16.0 - ₹32.0 LPA (Indicative)",
+    salaryNotice: "Realistic estimate based on Indian tech industry standards. Indicative only; depends on institute, coding proficiency, and company tier.",
+    futureScope: "Explosive growth driven by AI integration, cloud computing, automation, and SaaS platforms globally and across Indian tech hubs.",
+    roadmap: [
+      { step: 1, title: "Complete 10th & 12th in PCM", desc: "Focus heavily on Mathematics and Physics, scoring well in board exams." },
+      { step: 2, title: "Prepare for Engineering Entrances", desc: "Appear for JEE Main, BITSAT, and state engineering entrance exams." },
+      { step: 3, title: "Enroll in B.Tech CSE / IT or BCA", desc: "Choose a recognized university or institute with strong technical lab infrastructure." },
+      { step: 4, title: "Master Core Programming & Data Structures", desc: "Learn languages like Python, Java, or C++, and practice Data Structures & Algorithms." },
+      { step: 5, title: "Build Real-World Projects", desc: "Create full-stack web or mobile applications and host your code on GitHub." },
+      { step: 6, title: "Complete Summer Internships", desc: "Gain practical industry exposure through 2-3 month software development internships." },
+      { step: 7, title: "Crack Campus Placements / Apply for SDE Roles", desc: "Prepare for technical coding interviews, system design basics, and HR rounds." }
+    ]
+  },
+  {
+    id: "data-scientist",
+    title: "Data Scientist & AI Specialist",
+    category: "Technology",
+    shortDescription: "Extracts meaningful insights, builds predictive machine learning models, and transforms complex data into business decisions.",
+    whySuits: "Perfect for students passionate about mathematics, statistics, pattern discovery, programming, and artificial intelligence.",
+    eligibility: "Class 12 with Mathematics (Science PCM / PCMB or Commerce with Mathematics).",
+    streamMatch: ["science-pcm", "science-pcmb", "commerce-maths"],
+    requiredQualification: "B.Tech in CSE / AI-DS, B.Sc in Statistics/Mathematics/Data Science, followed by M.Sc or M.Tech",
+    courseOptions: [
+      "B.Tech in Artificial Intelligence & Data Science",
+      "B.Sc in Data Science / Statistics / Mathematics",
+      "Integrated M.Sc in Data Science",
+      "B.Tech in Computer Science with AI Specialization"
+    ],
+    courseDuration: "3 to 4 Years (Undergraduate)",
+    entranceExams: ["JEE Main", "CUET-UG (for central universities)", "BITSAT", "ISI Entrance Exam", "CMI Entrance Exam"],
+    requiredSkills: ["Mathematics", "Logical thinking", "Analytical thinking", "Computer knowledge", "Problem-solving"],
+    favouriteSubjects: ["Mathematics", "Computer Science", "Economics", "Physics"],
+    interests: ["Technology", "Science and Research"],
+    jobOpportunities: [
+      "Data Scientist / Machine Learning Engineer",
+      "Business Intelligence Analyst",
+      "AI Research Associate",
+      "Quantitative Data Strategist"
+    ],
+    salaryFresher: "₹6.0 - ₹12.0 LPA (Indicative)",
+    salaryExperienced: "₹20.0 - ₹40.0 LPA (Indicative)",
+    salaryNotice: "Realistic estimate based on Indian analytics industry standards. High demand command premiums for strong math & coding skills.",
+    futureScope: "AI and big data are revolutionizing healthcare, finance, e-commerce, and governance, making data science a top resilient career.",
+    roadmap: [
+      { step: 1, title: "Solidify High School Math & Statistics", desc: "Master calculus, probability, linear algebra, and matrices in 11th and 12th." },
+      { step: 2, title: "Pursue B.Tech or B.Sc in Data Science/Math", desc: "Enroll in programs with strong analytical, computational, and statistical rigor." },
+      { step: 3, title: "Learn Python, SQL, and Data Libraries", desc: "Master Python (Pandas, NumPy, Scikit-Learn) and database querying with SQL." },
+      { step: 4, title: "Study Machine Learning & Deep Learning", desc: "Understand supervised/unsupervised learning, neural networks, and model evaluation." },
+      { step: 5, title: "Participate in Kaggle & Real Competitions", desc: "Analyze real datasets, build predictive models, and publish project notebooks." },
+      { step: 6, title: "Undertake Data Analytics Internships", desc: "Work with business data to deliver predictive dashboards and actionable insights." },
+      { step: 7, title: "Land an Entry-Level Data Scientist Role", desc: "Join product companies, analytics consulting firms, or research labs." }
+    ]
+  },
+  {
+    id: "cybersecurity-analyst",
+    title: "Cybersecurity Analyst & Ethical Hacker",
+    category: "Technology",
+    shortDescription: "Protects computer systems, networks, and confidential data from cyberattacks, vulnerabilities, and digital threats.",
+    whySuits: "Suits analytical minds who enjoy investigative thinking, network security, ethical hacking, and defending digital infrastructure.",
+    eligibility: "Class 12 with Physics, Mathematics, and Chemistry/Computer Science.",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech in CSE / Information Security, or BCA/B.Sc IT with professional security certifications",
+    courseOptions: [
+      "B.Tech in Computer Science (Cybersecurity Specialization)",
+      "B.Sc in Cyber Forensics & Information Security",
+      "BCA with Networking & Security focus",
+      "Certifications: CEH, CompTIA Security+, CISSP (later)"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["JEE Main", "State Engineering CETs", "NFSU National Entrance Test (for forensic sciences)"],
+    requiredSkills: ["Problem-solving", "Analytical thinking", "Computer knowledge", "Logical thinking"],
+    favouriteSubjects: ["Computer Science", "Mathematics", "Physics"],
+    interests: ["Technology", "Engineering", "Government Jobs"],
+    jobOpportunities: [
+      "Cyber Defense Analyst",
+      "Information Security Officer",
+      "Penetration Tester / Ethical Hacker",
+      "Security Operations Center (SOC) Specialist"
+    ],
+    salaryFresher: "₹4.5 - ₹8.0 LPA (Indicative)",
+    salaryExperienced: "₹15.0 - ₹28.0 LPA (Indicative)",
+    salaryNotice: "Indicative Indian salary range. Certified professionals in high security sectors like banking and defense command premium pay.",
+    futureScope: "Critical national and corporate priority due to soaring cyber threats, cloud migrations, and strict data privacy regulations.",
+    roadmap: [
+      { step: 1, title: "Finish 12th with PCM & Computer Science", desc: "Build fundamental understanding of computers, operating systems, and logic." },
+      { step: 2, title: "Complete Degree in CSE / IT / Forensics", desc: "Focus coursework on computer networks, cryptography, and operating systems." },
+      { step: 3, title: "Master Networking Protocols & Linux", desc: "Learn TCP/IP, OSI model, firewalls, and command-line Linux administration." },
+      { step: 4, title: "Earn Recognized Entry Certifications", desc: "Obtain CompTIA Security+ or Certified Ethical Hacker (CEH) credentials." },
+      { step: 5, title: "Practice in Legal Sandboxes (CTF)", desc: "Participate in Capture The Flag (CTF) contests on platforms like TryHackMe and HackTheBox." },
+      { step: 6, title: "Intern with Security Operations Centers", desc: "Gain hands-on incident response, log monitoring, and threat detection experience." },
+      { step: 7, title: "Become a Full-Time Security Professional", desc: "Work with banks, government cybersecurity agencies, or cybersecurity consultancies." }
+    ]
+  },
+  {
+    id: "cloud-architect",
+    title: "Cloud Solutions Architect",
+    category: "Technology",
+    shortDescription: "Designs, scales, and manages scalable cloud infrastructure and services on platforms like AWS, Azure, and Google Cloud.",
+    whySuits: "Great for students interested in large-scale computer networks, cloud computing, systems reliability, and software architecture.",
+    eligibility: "Class 12 with PCM (Physics, Chemistry, Mathematics).",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech in CSE / IT / Electronics or BCA with cloud certifications",
+    courseOptions: [
+      "B.Tech in Computer Science & Engineering",
+      "B.Tech in Cloud Computing & Virtualization",
+      "BCA / B.Sc IT with Cloud Certifications (AWS / Azure / GCP)"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["JEE Main", "State Engineering CETs", "BITSAT", "VITEEE"],
+    requiredSkills: ["Logical thinking", "Problem-solving", "Computer knowledge", "Analytical thinking"],
+    favouriteSubjects: ["Computer Science", "Mathematics", "Physics"],
+    interests: ["Technology", "Engineering"],
+    jobOpportunities: [
+      "Cloud Solutions Architect",
+      "DevOps / Site Reliability Engineer (SRE)",
+      "Cloud Security Specialist",
+      "Infrastructure Engineer"
+    ],
+    salaryFresher: "₹5.0 - ₹9.5 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹35.0 LPA (Indicative)",
+    salaryNotice: "Realistic estimate based on Indian IT and product sectors. Cloud architecture is one of the highest paying technical roles.",
+    futureScope: "Virtually all global and Indian enterprises are migrating to hybrid and multi-cloud, sustaining multi-decade high demand.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCM", desc: "Maintain solid foundation in logic, problem-solving, and computer fundamentals." },
+      { step: 2, title: "Earn a B.Tech in CSE or IT", desc: "Learn distributed systems, computer architecture, databases, and networks." },
+      { step: 3, title: "Master Cloud Fundamentals", desc: "Study cloud primitives (Compute, Storage, Networking, IAM) on AWS, Azure, or GCP." },
+      { step: 4, title: "Learn DevOps & Containerization", desc: "Learn Docker, Kubernetes, Terraform, and CI/CD automation pipelines." },
+      { step: 5, title: "Obtain Associate Cloud Certifications", desc: "Clear AWS Solutions Architect Associate or Google Associate Cloud Engineer exam." },
+      { step: 6, title: "Intern as Cloud / DevOps Engineer", desc: "Deploy real applications, optimize cloud costs, and manage uptime." },
+      { step: 7, title: "Advance to Cloud Architect", desc: "Design resilient enterprise cloud infrastructure for high availability and scale." }
+    ]
+  },
+  {
+    id: "web-fullstack-dev",
+    title: "Full-Stack Web Developer",
+    category: "Technology",
+    shortDescription: "Builds user-facing web applications, client interfaces, back-end APIs, and databases powering modern internet platforms.",
+    whySuits: "Suits those who like seeing immediate visual results of their code while structuring databases and backend business logic.",
+    eligibility: "Class 12 from any stream (Science with PCM preferred for engineering degrees).",
+    streamMatch: ["science-pcm", "science-pcmb", "commerce-maths", "commerce", "arts"],
+    requiredQualification: "B.Tech CSE/IT, BCA, or B.Sc CS (also accessible via bootcamps with portfolio)",
+    courseOptions: [
+      "BCA (Bachelor of Computer Applications)",
+      "B.Tech in Computer Science / IT",
+      "B.Sc in Information Technology",
+      "Full-Stack Web Development Specialization Bootcamps"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["JEE Main", "CUET-UG", "IPU CET", "State BCA Entrances"],
+    requiredSkills: ["Creativity", "Problem-solving", "Computer knowledge", "Logical thinking"],
+    favouriteSubjects: ["Computer Science", "Mathematics", "Fine Arts"],
+    interests: ["Technology", "Arts and Design"],
+    jobOpportunities: [
+      "Frontend Developer (React, Vue, Next.js)",
+      "Backend Developer (Node.js, Python, Go, Java)",
+      "Full-Stack Engineer at Startups & Unicorns",
+      "Independent Web Consultant / Freelancer"
+    ],
+    salaryFresher: "₹4.0 - ₹8.0 LPA (Indicative)",
+    salaryExperienced: "₹14.0 - ₹28.0 LPA (Indicative)",
+    salaryNotice: "Indicative Indian tech compensation. Proven open-source contributions and portfolio projects lead to superior packages.",
+    futureScope: "Continuous demand as every business requires sophisticated web portals, progressive web apps, and digital platforms.",
+    roadmap: [
+      { step: 1, title: "Complete 12th Standard", desc: "Develop good basic computer literacy, logical reasoning, and English communication." },
+      { step: 2, title: "Enroll in BCA / B.Tech or B.Sc CS", desc: "Gain comprehensive grounding in software engineering and database design." },
+      { step: 3, title: "Master HTML, CSS & JavaScript", desc: "Build responsive, accessible, interactive web pages and master modern ES6+ JS." },
+      { step: 4, title: "Learn Modern Frontend Frameworks", desc: "Build component-driven user interfaces using React, Vue, or Angular." },
+      { step: 5, title: "Master Backend & Databases", desc: "Learn Node.js/Express or Python/Django, along with PostgreSQL and MongoDB." },
+      { step: 6, title: "Ship 3-5 Full-Stack Applications", desc: "Build authentication, payment gateway, and dashboard web apps deployed live." },
+      { step: 7, title: "Get Hired as Full-Stack Engineer", desc: "Join product startups, SaaS companies, or digital product studios." }
+    ]
+  },
+  {
+    id: "mobile-app-developer",
+    title: "Mobile App Developer",
+    category: "Technology",
+    shortDescription: "Creates engaging, high-performance mobile applications for Android and iOS smartphones, tablets, and smart devices.",
+    whySuits: "Ideal for creative problem-solvers who want to build apps used by millions of smartphone users every day.",
+    eligibility: "Class 12 (Science or Commerce with Computer/Maths preferred).",
+    streamMatch: ["science-pcm", "science-pcmb", "commerce-maths", "commerce"],
+    requiredQualification: "B.Tech CSE/IT, BCA, or B.Sc Computer Science",
+    courseOptions: [
+      "B.Tech in Computer Science & Engineering",
+      "BCA with Mobile Application Development",
+      "B.Sc in Information Technology"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["JEE Main", "State Engineering CETs", "CUET-UG"],
+    requiredSkills: ["Creativity", "Problem-solving", "Computer knowledge", "Logical thinking"],
+    favouriteSubjects: ["Computer Science", "Mathematics"],
+    interests: ["Technology", "Arts and Design"],
+    jobOpportunities: [
+      "Android Developer (Kotlin)",
+      "iOS Developer (Swift)",
+      "Cross-Platform Developer (Flutter / React Native)",
+      "Mobile Product Engineer"
+    ],
+    salaryFresher: "₹4.0 - ₹8.0 LPA (Indicative)",
+    salaryExperienced: "₹14.0 - ₹26.0 LPA (Indicative)",
+    salaryNotice: "Realistic estimate based on Indian mobile industry data. App store publication track record accelerates career advancement.",
+    futureScope: "Mobile devices account for over 70% of digital traffic in India, sustaining permanent demand for high-performance apps.",
+    roadmap: [
+      { step: 1, title: "Finish 12th with Good Academic Record", desc: "Strengthen logical problem-solving and basic algorithmic thinking." },
+      { step: 2, title: "Pursue B.Tech CSE or BCA Degree", desc: "Learn object-oriented programming, data structures, and UI principles." },
+      { step: 3, title: "Pick Android (Kotlin) or Cross-Platform (Flutter)", desc: "Master app lifecycle, UI layout, state management, and network calls." },
+      { step: 4, title: "Build and Publish Apps on Google Play Store", desc: "Create utility, e-commerce, or productivity apps and publish them publicly." },
+      { step: 5, title: "Integrate APIs, Firebase & Local Storage", desc: "Learn offline caching, push notifications, and analytics integration." },
+      { step: 6, title: "Intern with Mobile Product Companies", desc: "Collaborate with UI designers and backend teams on production features." },
+      { step: 7, title: "Secure Full-Time Mobile Dev Role", desc: "Join consumer tech startups, fintech apps, or gaming studios." }
+    ]
+  },
+  {
+    id: "mechanical-engineer",
+    title: "Mechanical Engineer",
+    category: "Engineering",
+    shortDescription: "Designs, analyzes, manufactures, and maintains mechanical machinery, automotive vehicles, thermal systems, and robotics.",
+    whySuits: "Best suited for students who love machines, automotive technology, physics, 3D CAD modeling, and hands-on manufacturing.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics (PCM).",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech / B.E. in Mechanical Engineering",
+    courseOptions: [
+      "B.Tech in Mechanical Engineering",
+      "B.Tech in Automotive Engineering",
+      "B.Tech in Manufacturing / Production Engineering"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["JEE Main", "JEE Advanced", "BITSAT", "State CETs"],
+    requiredSkills: ["Problem-solving", "Mathematics", "Analytical thinking", "Drawing and designing"],
+    favouriteSubjects: ["Physics", "Mathematics", "Chemistry"],
+    interests: ["Engineering", "Technology"],
+    jobOpportunities: [
+      "Automotive Design Engineer (EV & ICE)",
+      "Thermal & HVAC Systems Engineer",
+      "Plant Maintenance & Production Engineer",
+      "PSU Executive (BHEL, IOCL, ONGC, NTPC via GATE)"
+    ],
+    salaryFresher: "₹3.8 - ₹7.0 LPA (Indicative)",
+    salaryExperienced: "₹12.0 - ₹22.0 LPA (Indicative)",
+    salaryNotice: "Indicative Indian salary range. GATE qualifiers joining PSUs or EV manufacturing giants receive competitive entry packages.",
+    futureScope: "High growth in Electric Vehicles (EV), renewable energy equipment, automation, aerospace components, and advanced robotics.",
+    roadmap: [
+      { step: 1, title: "Excel in 12th Science with PCM", desc: "Focus thoroughly on classical mechanics, thermodynamics, and calculus." },
+      { step: 2, title: "Clear Engineering Entrance Exams", desc: "Secure admission into reputable NITs, IITs, or government engineering colleges." },
+      { step: 3, title: "Earn B.Tech in Mechanical Engineering", desc: "Master fluid mechanics, strength of materials, kinematics, and thermodynamics." },
+      { step: 4, title: "Master CAD/CAM & Simulation Software", desc: "Become proficient in SolidWorks, AutoCAD, CATIA, and ANSYS simulation." },
+      { step: 5, title: "Join College Collegiate Design Teams", desc: "Participate in Formula Student, BAJA SAE, or robotics design competitions." },
+      { step: 6, title: "Complete Industrial Training & Internships", desc: "Train in manufacturing plants, automotive workshops, or aerospace facilities." },
+      { step: 7, title: "Launch Career in Core Industry or PSUs", desc: "Appear for GATE for PSU recruitment or join automotive / manufacturing R&D." }
+    ]
+  },
+  {
+    id: "civil-engineer",
+    title: "Civil & Infrastructure Engineer",
+    category: "Engineering",
+    shortDescription: "Plans, designs, supervises, and constructs mega infrastructure projects including bridges, highways, metro systems, and green buildings.",
+    whySuits: "Suits students passionate about structural design, mega construction, urban planning, and building tangible societal infrastructure.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics (PCM).",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech / B.E. in Civil Engineering",
+    courseOptions: [
+      "B.Tech in Civil Engineering",
+      "B.Tech in Construction Technology & Management",
+      "B.Tech in Structural Engineering"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["JEE Main", "JEE Advanced", "State CETs"],
+    requiredSkills: ["Problem-solving", "Leadership", "Mathematics", "Analytical thinking"],
+    favouriteSubjects: ["Physics", "Mathematics"],
+    interests: ["Engineering", "Government Jobs"],
+    jobOpportunities: [
+      "Structural Engineer",
+      "Project Construction Manager",
+      "Urban Infrastructure Planner",
+      "Government Assistant Engineer (CPWD, Railways, PWD via IES/GATE)"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹11.0 - ₹22.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Government service (IES/PSU) provides stability, housing, and structured career progression.",
+    futureScope: "India's massive infrastructure expansion (National Highways, Metros, Smart Cities, Bullet Train, Ports) ensures steady long-term demand.",
+    roadmap: [
+      { step: 1, title: "Complete 12th PCM with Good Grades", desc: "Focus on trigonometry, coordinate geometry, mechanics, and physics." },
+      { step: 2, title: "Join B.Tech Civil Engineering", desc: "Study survey techniques, geotechnical engineering, concrete tech, and structural analysis." },
+      { step: 3, title: "Learn Essential Civil Engineering Software", desc: "Master AutoCAD Civil 3D, STAAD Pro, ETABS, and Revit Architecture." },
+      { step: 4, title: "Participate in Site Visits & Field Surveys", desc: "Gain hands-on exposure to total stations, soil testing, and construction sites." },
+      { step: 5, title: "Undergo Construction Site Internships", desc: "Work with EPC contractors like L&T, Tata Projects, or municipal metro projects." },
+      { step: 6, title: "Prepare for GATE or UPSC ESE (IES)", desc: "Target prestigious officer posts in Indian Engineering Services or CPWD." },
+      { step: 7, title: "Grow into Senior Project / Structural Manager", desc: "Supervise multi-crore infrastructure projects and oversee structural safety." }
+    ]
+  },
+  {
+    id: "electrical-engineer",
+    title: "Electrical & Electronics Engineer",
+    category: "Engineering",
+    shortDescription: "Designs and manages electrical power systems, smart grids, renewable energy systems, circuit boards, and electronic equipment.",
+    whySuits: "Great for students fascinated by electricity, semiconductor circuits, renewable solar/wind power, and electronic gadget design.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics (PCM).",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech / B.E. in Electrical & Electronics Engineering (EEE / EE)",
+    courseOptions: [
+      "B.Tech in Electrical Engineering",
+      "B.Tech in Electrical & Electronics Engineering (EEE)",
+      "B.Tech in Power Engineering / Renewable Energy"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["JEE Main", "JEE Advanced", "State CETs", "BITSAT"],
+    requiredSkills: ["Logical thinking", "Problem-solving", "Mathematics", "Analytical thinking"],
+    favouriteSubjects: ["Physics", "Mathematics"],
+    interests: ["Engineering", "Technology"],
+    jobOpportunities: [
+      "Power Grid Systems Engineer",
+      "Renewable Energy & Solar Specialist",
+      "Embedded Hardware Engineer",
+      "Power Sector PSU Engineer (PGCIL, NTPC, BHEL via GATE)"
+    ],
+    salaryFresher: "₹3.8 - ₹7.0 LPA (Indicative)",
+    salaryExperienced: "₹12.0 - ₹24.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Energy transition and semiconductor fabrication initiatives in India are opening lucrative avenues.",
+    futureScope: "High demand driven by India's semiconductor mission, electric vehicle (EV) battery ecosystems, and massive solar/wind transitions.",
+    roadmap: [
+      { step: 1, title: "Complete 12th PCM with Strong Physics", desc: "Focus on electromagnetism, current electricity, and mathematical calculus." },
+      { step: 2, title: "Pursue B.Tech in EE or EEE", desc: "Study circuit theory, control systems, electrical machines, and power systems." },
+      { step: 3, title: "Learn Simulation & Circuit Tools", desc: "Master MATLAB/Simulink, PSCAD, Multisim, and PCB layout design tools." },
+      { step: 4, title: "Build Hardware & IoT Projects", desc: "Work with microcontrollers (Arduino, ESP32) and power electronics converters." },
+      { step: 5, title: "Complete Substation or Manufacturing Training", desc: "Gain experience in power distribution companies (DISCOMs) or electronics manufacturing." },
+      { step: 6, title: "Prepare for GATE or Corporate Hiring", desc: "Target Power Grid, Siemens, Schneider Electric, ABB, or Tata Power." },
+      { step: 7, title: "Advance to Senior Power or Systems Engineer", desc: "Lead smart grid integration, industrial automation, or renewable energy plants." }
+    ]
+  },
+  {
+    id: "aerospace-engineer",
+    title: "Aerospace & Aeronautical Engineer",
+    category: "Engineering",
+    shortDescription: "Designs, tests, and manufactures commercial airplanes, defense fighter jets, satellites, space launch vehicles, and drones.",
+    whySuits: "Ideal for students enthralled by flight dynamics, outer space, ISRO satellite missions, rocket propulsion, and defense aviation.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics (PCM) with high scores.",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech in Aerospace / Aeronautical Engineering",
+    courseOptions: [
+      "B.Tech in Aerospace Engineering",
+      "B.Tech in Aeronautical Engineering",
+      "B.Tech in Avionics (IIST Thiruvananthapuram)"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["JEE Advanced (for IITs and IIST)", "JEE Main", "State CETs"],
+    requiredSkills: ["Mathematics", "Problem-solving", "Analytical thinking", "Logical thinking"],
+    favouriteSubjects: ["Physics", "Mathematics", "Chemistry"],
+    interests: ["Engineering", "Science and Research"],
+    jobOpportunities: [
+      "Aerodynamics Design Specialist",
+      "Scientist/Engineer at ISRO or DRDO",
+      "Aircraft Maintenance & Systems Engineer",
+      "Commercial Drone & UAV Architect"
+    ],
+    salaryFresher: "₹5.0 - ₹9.0 LPA (Indicative)",
+    salaryExperienced: "₹15.0 - ₹30.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. ISRO/DRDO provide government scientist pay scales with defense benefits; private aviation offers global roles.",
+    futureScope: "Booming domestic space sector (IN-SPACe), defense drone innovation, and commercial airline fleet expansions across South Asia.",
+    roadmap: [
+      { step: 1, title: "Excel in 12th PCM with High Marks", desc: "Deep understanding of Newtonian mechanics, thermodynamics, and advanced math." },
+      { step: 2, title: "Target Premier Institutes (IITs / IIST)", desc: "Crack JEE Advanced to enter premier aerospace programs like IIT Kanpur, IIT Bombay, IIST." },
+      { step: 3, title: "Earn B.Tech in Aerospace Engineering", desc: "Study aerodynamics, propulsion systems, flight mechanics, and space dynamics." },
+      { step: 4, title: "Master CFD Simulation Software", desc: "Learn ANSYS Fluent, CATIA, and structural FEA software for aircraft parts." },
+      { step: 5, title: "Participate in CanSat or Rocketry Projects", desc: "Design model aircraft, UAVs, or student rocket payloads for competitions." },
+      { step: 6, title: "Intern with Aerospace Labs / HAL / Drone Startups", desc: "Gain hands-on wind tunnel, propulsion test, or flight telemetry experience." },
+      { step: 7, title: "Join Space Agencies or Aviation Leaders", desc: "Work with ISRO, DRDO, HAL, Boeing India, Airbus, or space startups." }
+    ]
+  },
+  {
+    id: "robotics-engineer",
+    title: "Robotics & Automation Engineer",
+    category: "Engineering",
+    shortDescription: "Combines mechanical, electronics, and computer science to build autonomous robots, industrial cobots, and automated manufacturing systems.",
+    whySuits: "Suits multi-disciplinary minds who want to build physical robotic hardware programmed with intelligent AI algorithms.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics (PCM).",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "B.Tech in Mechatronics, Robotics, CSE, or Mechanical Engineering",
+    courseOptions: [
+      "B.Tech in Robotics & Automation",
+      "B.Tech in Mechatronics Engineering",
+      "B.Tech in Mechanical with Robotics Electives",
+      "B.Tech in CSE with Robotics Specialization"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["JEE Main", "JEE Advanced", "BITSAT", "VITEEE"],
+    requiredSkills: ["Problem-solving", "Computer knowledge", "Logical thinking", "Mathematics"],
+    favouriteSubjects: ["Physics", "Mathematics", "Computer Science"],
+    interests: ["Engineering", "Technology"],
+    jobOpportunities: [
+      "Robotics Software Engineer (ROS)",
+      "Industrial Automation Specialist",
+      "Autonomous Navigation (AGV) Developer",
+      "Warehouse Robotics Engineer"
+    ],
+    salaryFresher: "₹4.5 - ₹8.5 LPA (Indicative)",
+    salaryExperienced: "₹15.0 - ₹28.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. High demand in smart manufacturing, e-commerce fulfillment hubs, and surgical medical robotics.",
+    futureScope: "Tremendous growth as factories, hospitals, defense squads, and logistics companies rapidly transition to robotic automation.",
+    roadmap: [
+      { step: 1, title: "Master 12th PCM Concepts", desc: "Focus on mechanics, kinematics, calculus, and electrodynamics." },
+      { step: 2, title: "Pursue B.Tech in Mechatronics / Robotics / CSE", desc: "Gain combined knowledge of mechanical frames, motor drives, and code." },
+      { step: 3, title: "Learn Robot Operating System (ROS) & C++", desc: "Study ROS2, kinematics, motion planning, and computer vision with OpenCV." },
+      { step: 4, title: "Build Working Autonomous Robotic Arms / Rovers", desc: "Fabricate prototypes using 3D printing, servo motors, LiDAR, and microprocessors." },
+      { step: 5, title: "Compete in Robocon & Autonomous Challenges", desc: "Participate in university robotics competitions to solve real-world challenges." },
+      { step: 6, title: "Intern at Robotics or Industrial Automation Companies", desc: "Gain production floor experience with programmable logic controllers (PLCs)." },
+      { step: 7, title: "Launch Career as Robotics Engineer", desc: "Work with robotics startups, automotive assembly plants, or research labs." }
+    ]
+  },
+  {
+    id: "biomedical-engineer",
+    title: "Biomedical & Medical Equipment Engineer",
+    category: "Engineering",
+    shortDescription: "Bridges engineering and healthcare to design medical devices, MRI machines, dialysis equipment, and artificial prosthetics.",
+    whySuits: "Perfect for students who love biology and healthcare but prefer an engineering, technology, and equipment-building career pathway.",
+    eligibility: "Class 12 with Physics, Chemistry, and Mathematics or Biology (PCM/PCB/PCMB).",
+    streamMatch: ["science-pcm", "science-pcmb", "science-pcb"],
+    requiredQualification: "B.Tech / B.E. in Biomedical Engineering",
+    courseOptions: [
+      "B.Tech in Biomedical Engineering",
+      "B.Tech in Medical Electronics",
+      "B.Tech in Biotechnology & Bio-Instrumentation"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["JEE Main", "State Engineering CETs", "VITEEE"],
+    requiredSkills: ["Problem-solving", "Helping people", "Analytical thinking", "Computer knowledge"],
+    favouriteSubjects: ["Biology", "Physics", "Mathematics"],
+    interests: ["Engineering", "Medical", "Technology"],
+    jobOpportunities: [
+      "Biomedical Equipment Specialist",
+      "Medical Device R&D Engineer",
+      "Clinical Hospital Systems Engineer",
+      "Regulatory Affairs & Quality Assurance Specialist"
+    ],
+    salaryFresher: "₹3.8 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹11.0 - ₹22.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Global med-tech companies (GE Healthcare, Siemens Healthineers, Philips) offer lucrative technical roles.",
+    futureScope: "Continuous expansion driven by smart wearable diagnostic sensors, robotic surgery, telemedicine devices, and indigenous medical device manufacturing in India.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCM or PCMB", desc: "Build good understanding of physical sciences and biological anatomy." },
+      { step: 2, title: "Enroll in B.Tech Biomedical Engineering", desc: "Study biomaterials, physiological modeling, biomedical sensors, and imaging." },
+      { step: 3, title: "Learn Signal Processing & Medical Imaging", desc: "Master MATLAB, Python, and DICOM image processing standards." },
+      { step: 4, title: "Build IoT Health Monitoring Prototypes", desc: "Design ECG monitors, pulse oximeters, and sensor-based alert systems." },
+      { step: 5, title: "Intern at Super-Specialty Hospitals or Medtech OEMs", desc: "Calibrate and service ICU ventilators, CT scanners, and patient monitoring setups." },
+      { step: 6, title: "Understand Medical Device Regulatory Compliance", desc: "Learn ISO 13485 standards and medical device approval processes." },
+      { step: 7, title: "Work with Global MedTech Leaders or Hospitals", desc: "Deploy life-saving clinical hardware and develop next-generation diagnostic tools." }
+    ]
+  },
+  {
+    id: "general-physician",
+    title: "General Physician / Doctor (MBBS)",
+    category: "Medical",
+    shortDescription: "Diagnoses illnesses, prescribes treatments, provides clinical patient care, and saves human lives across hospitals and clinics.",
+    whySuits: "Suits deeply empathetic, dedicated students who want a respected medical profession directly helping human beings heal.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology (PCB) with minimum 50% aggregate (40% for reserved categories).",
+    streamMatch: ["science-pcb", "science-pcmb"],
+    requiredQualification: "MBBS (Bachelor of Medicine, Bachelor of Surgery) + Optional MD / MS Post-Graduation",
+    courseOptions: [
+      "MBBS (Undergraduate Medical Degree)",
+      "Postgraduate MD (General Medicine / Pediatrics / Dermatology)",
+      "Postgraduate MS (General Surgery / Orthopedics)",
+      "DNB (Diplomate of National Board)"
+    ],
+    courseDuration: "5.5 Years (including 1 Year Compulsory Rotatory Internship)",
+    entranceExams: ["NEET-UG (National Eligibility cum Entrance Test)"],
+    requiredSkills: ["Helping people", "Problem-solving", "Communication", "Analytical thinking"],
+    favouriteSubjects: ["Biology", "Chemistry", "Physics"],
+    interests: ["Medical", "Science and Research"],
+    jobOpportunities: [
+      "Medical Officer in Government / Private Hospitals",
+      "Independent Clinic Physician",
+      "Critical Care & Emergency Doctor",
+      "Specialist Consultant (after MD / MS)"
+    ],
+    salaryFresher: "₹7.0 - ₹12.0 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹45.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian medical compensation. Doctors with postgraduate specializations (MD/MS) and surgical experience earn significantly higher.",
+    futureScope: "Permanent noble necessity; severe doctor-to-population deficit in India ensures 100% employment stability and immense societal prestige.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCB with High Marks", desc: "Master NCERT Biology, Chemistry, and Physics thoroughly." },
+      { step: 2, title: "Qualify NEET-UG with Top Rank", desc: "Secure a merit seat in AIIMS, central or state government medical colleges." },
+      { step: 3, title: "Complete 4.5 Years of MBBS Coursework", desc: "Study Anatomy, Physiology, Pathology, Pharmacology, and clinical subjects." },
+      { step: 4, title: "Complete 1-Year Compulsory Rotatory Internship", desc: "Treat patients across medicine, surgery, pediatrics, and obstetrics wards." },
+      { step: 5, title: "Obtain State / National Medical Council Registration", desc: "Receive your official license to practice medicine as a registered physician." },
+      { step: 6, title: "Crack NEET-PG / NExT for MD / MS Specialization", desc: "Pursue 3-year post-graduation in Medicine, Surgery, or chosen specialty." },
+      { step: 7, title: "Establish Clinical Practice or Hospital Consultancy", desc: "Serve patients with expert diagnostic knowledge and clinical care." }
+    ]
+  },
+  {
+    id: "dental-surgeon",
+    title: "Dental Surgeon (BDS)",
+    category: "Medical",
+    shortDescription: "Specializes in oral healthcare, diagnosing dental diseases, performing root canals, dental surgeries, and smile aesthetics.",
+    whySuits: "Ideal for students interested in medical science, fine manual dexterity, patient care, and running an independent clinical practice.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology (PCB) with NEET-UG qualification.",
+    streamMatch: ["science-pcb", "science-pcmb"],
+    requiredQualification: "BDS (Bachelor of Dental Surgery) + Optional MDS (Master of Dental Surgery)",
+    courseOptions: [
+      "BDS (Bachelor of Dental Surgery)",
+      "MDS in Orthodontics & Dentofacial Orthopedics",
+      "MDS in Oral & Maxillofacial Surgery",
+      "MDS in Conservative Dentistry & Endodontics"
+    ],
+    courseDuration: "5 Years (including 1 Year Rotatory Internship)",
+    entranceExams: ["NEET-UG"],
+    requiredSkills: ["Helping people", "Drawing and designing", "Problem-solving", "Communication"],
+    favouriteSubjects: ["Biology", "Chemistry", "Physics"],
+    interests: ["Medical", "Healthcare"],
+    jobOpportunities: [
+      "Dental Surgeon at Hospitals / Polyclinics",
+      "Independent Dental Clinic Owner",
+      "Aesthetic & Cosmetic Dental Specialist",
+      "Military Dental Corps (Indian Armed Forces)"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹25.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Independent private clinics with established local patient clientele generate high recurring returns.",
+    futureScope: "Growing awareness of dental hygiene, cosmetic dentistry, orthodontics aligners, and dental tourism across Indian metropolitan centers.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCB", desc: "Focus on biological sciences, human physiology, and NEET preparation." },
+      { step: 2, title: "Clear NEET-UG", desc: "Secure admission in government or reputed private dental colleges." },
+      { step: 3, title: "Complete 4 Years BDS Academic Training", desc: "Study dental anatomy, pharmacology, oral pathology, and prosthodontics." },
+      { step: 4, title: "Complete 1-Year Clinical Internship", desc: "Perform extractions, restorations, scalings, and patient dental consultations." },
+      { step: 5, title: "Register with State Dental Council", desc: "Obtain valid practicing credentials as a licensed dental surgeon." },
+      { step: 6, title: "Pursue MDS or Advanced Aesthetic Certifications", desc: "Specialize in root canals (Endodontics) or braces/aligners (Orthodontics)." },
+      { step: 7, title: "Set Up Private Practice or Join Hospital Chain", desc: "Provide high-precision oral healthcare with modern equipment." }
+    ]
+  },
+  {
+    id: "pharmacist",
+    title: "Pharmacist & Pharmaceutical Scientist",
+    category: "Healthcare",
+    shortDescription: "Formulates, tests, manufactures, and dispenses medications, ensuring drug safety, efficacy, and clinical compliance.",
+    whySuits: "Suits students fascinated by medicinal chemistry, pharmacology, drug discovery, and healthcare management.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology or Mathematics (PCB/PCM/PCMB).",
+    streamMatch: ["science-pcb", "science-pcm", "science-pcmb"],
+    requiredQualification: "B.Pharm (Bachelor of Pharmacy) or Pharm.D (Doctor of Pharmacy)",
+    courseOptions: [
+      "B.Pharm (4 Years)",
+      "Pharm.D (6 Years Clinical Pharmacy Degree)",
+      "M.Pharm in Pharmaceutics / Pharmacology / Quality Assurance",
+      "Diploma in Pharmacy (D.Pharm - 2 Years)"
+    ],
+    courseDuration: "4 to 6 Years",
+    entranceExams: ["State Pharmacy CETs (MHT-CET, WBJEE, KCET, etc.)", "GPAT (for M.Pharm)", "BITS HD / BITSAT"],
+    requiredSkills: ["Analytical thinking", "Problem-solving", "Helping people", "Logical thinking"],
+    favouriteSubjects: ["Chemistry", "Biology", "Mathematics"],
+    interests: ["Healthcare", "Medical", "Science and Research"],
+    jobOpportunities: [
+      "Formulation & R&D Scientist at Pharma Companies",
+      "Quality Control (QC) & Quality Assurance (QA) Analyst",
+      "Clinical Research Associate (CRA)",
+      "Registered Community / Hospital Pharmacist"
+    ],
+    salaryFresher: "₹3.5 - ₹6.0 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹20.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. India is known as the 'Pharmacy of the World', with immense pharma exports generating steady career tracks.",
+    futureScope: "Continuous expansion in pharmaceutical manufacturing, clinical trial outsourcing, generic medicines, and vaccine innovation.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCB or PCM", desc: "Excel in organic chemistry, biochemistry, and general science." },
+      { step: 2, title: "Clear State Pharmacy Entrance or B.Pharm Admission", desc: "Join an approved PCI (Pharmacy Council of India) recognized college." },
+      { step: 3, title: "Complete 4-Year B.Pharm Curriculum", desc: "Learn medicinal chemistry, pharmacognosy, pharmaceutics, and pharmacology." },
+      { step: 4, title: "Complete Industrial Training in Pharma Plant", desc: "Gain hands-on experience in tablet manufacturing, HPLC analysis, and quality labs." },
+      { step: 5, title: "Obtain Pharmacist License from State Pharmacy Council", desc: "Receive your statutory license to dispense medications and open pharmacy units." },
+      { step: 6, title: "Appear for GPAT for Master's Degree (M.Pharm)", desc: "Specialize in drug formulation, pharmacology, or clinical research." },
+      { step: 7, title: "Join Pharmaceutical Majors or Clinical CROs", desc: "Work with companies like Sun Pharma, Cipla, Dr. Reddy's, or multinational biopharmas." }
+    ]
+  },
+  {
+    id: "physiotherapist",
+    title: "Physiotherapist (BPT)",
+    category: "Healthcare",
+    shortDescription: "Rehabilitates patients recovering from injuries, surgeries, neurological disorders, and sports injuries using physical therapy.",
+    whySuits: "Suits active, empathetic individuals interested in human anatomy, sports science, movement biomechanics, and hands-on recovery.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology (PCB) with minimum 50% marks.",
+    streamMatch: ["science-pcb", "science-pcmb"],
+    requiredQualification: "BPT (Bachelor of Physiotherapy) + Optional MPT (Master of Physiotherapy)",
+    courseOptions: [
+      "BPT (Bachelor of Physiotherapy)",
+      "MPT in Sports Physiotherapy",
+      "MPT in Neurological Sciences",
+      "MPT in Musculoskeletal / Orthopedic Rehabilitation"
+    ],
+    courseDuration: "4.5 Years (including 6-month clinical internship)",
+    entranceExams: ["NEET-UG (in some states)", "State Allied Health Sciences CETs", "Institutional Entrances (IPU, Manipal, etc.)"],
+    requiredSkills: ["Helping people", "Communication", "Problem-solving"],
+    favouriteSubjects: ["Biology", "Physics", "Psychology"],
+    interests: ["Healthcare", "Medical"],
+    jobOpportunities: [
+      "Consultant Physiotherapist in Multi-Specialty Hospitals",
+      "Sports Physiotherapist for Athletic Teams & Academies",
+      "Neuro-Rehabilitation Specialist",
+      "Owner of Private Rehabilitation & Ergonomics Clinic"
+    ],
+    salaryFresher: "₹3.2 - ₹5.5 LPA (Indicative)",
+    salaryExperienced: "₹9.0 - ₹18.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Sports physios working with cricket leagues, athletic federations, or luxury fitness centers earn top tiers.",
+    futureScope: "High demand driven by aging population, sedentary desk lifestyles causing spine disorders, and booming sports infrastructure in India.",
+    roadmap: [
+      { step: 1, title: "Finish 12th with PCB", desc: "Gain strong foundation in biology, human musculoskeletal systems, and mechanics." },
+      { step: 2, title: "Clear State Allied Health CET or BPT Entrance", desc: "Enroll in a recognized university medical physiotherapy college." },
+      { step: 3, title: "Complete 4 Years of BPT Studies", desc: "Study biomechanics, kinesiology, electrotherapy, exercise therapy, and pathology." },
+      { step: 4, title: "Complete 6-Month Mandatory Clinical Internship", desc: "Treat orthopedic, post-operative, pediatric, and ICU patients." },
+      { step: 5, title: "Get Certified & Join Physiotherapy Associations", desc: "Obtain membership with Indian Association of Physiotherapists (IAP)." },
+      { step: 6, title: "Pursue MPT in Sports or Orthopedics", desc: "Master specialized manual therapy techniques and sports injury management." },
+      { step: 7, title: "Work with Sports Teams, Hospitals, or Open Clinic", desc: "Restore patient mobility and train elite athletes for peak physical health." }
+    ]
+  },
+  {
+    id: "nursing-officer",
+    title: "Nursing Officer & Clinical Care Specialist",
+    category: "Healthcare",
+    shortDescription: "Provides direct clinical nursing care, administers medication, operates ICU life-support, and coordinates patient recovery.",
+    whySuits: "Suits compassionate, calm, and resilient individuals who want to be the primary caregiver and backbone of patient healthcare.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology (PCB) with minimum 45-50% marks.",
+    streamMatch: ["science-pcb", "science-pcmb"],
+    requiredQualification: "B.Sc Nursing (4 Years)",
+    courseOptions: [
+      "B.Sc Nursing (4 Years Basic Course)",
+      "Post Basic B.Sc Nursing (for GNM diploma holders)",
+      "M.Sc Nursing in Critical Care / Pediatrics / Oncology",
+      "GNM (General Nursing and Midwifery - 3.5 Years)"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["NEET-UG (used by AIIMS/Military Nursing/JIPMER)", "AIIMS B.Sc Nursing Entrance", "State Nursing CETs"],
+    requiredSkills: ["Helping people", "Communication", "Problem-solving", "Leadership"],
+    favouriteSubjects: ["Biology", "Chemistry", "Psychology"],
+    interests: ["Healthcare", "Medical", "Government Jobs"],
+    jobOpportunities: [
+      "Nursing Officer in AIIMS & Central Government Hospitals (NORCET)",
+      "Critical Care / ICU Nurse in Private Hospitals",
+      "Military Nursing Service (MNS) Commissioned Officer",
+      "Global Healthcare Specialist (UK NHS, USA, Gulf countries)"
+    ],
+    salaryFresher: "₹3.8 - ₹7.5 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹18.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. AIIMS Nursing Officers selected via NORCET start at Level-7 Central Pay Commission (~₹70,000+/month).",
+    futureScope: "Unprecedented global demand; Indian nursing graduates have exceptional career mobility to the UK, Canada, Australia, and Middle East.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCB", desc: "Maintain solid marks in biology, chemistry, and functional English." },
+      { step: 2, title: "Clear AIIMS Nursing Entrance or State Nursing CET", desc: "Gain admission into an INC (Indian Nursing Council) accredited institution." },
+      { step: 3, title: "Complete 4-Year B.Sc Nursing Degree", desc: "Master medical-surgical nursing, pharmacology, obstetrics, and community health." },
+      { step: 4, title: "Extensive Hospital Bedside Rotations", desc: "Perform clinical duties in operation theaters, emergency wards, and ICUs." },
+      { step: 5, title: "Register with State Nursing Council", desc: "Obtain your official Registered Nurse & Registered Midwife (RN/RM) license." },
+      { step: 6, title: "Appear for AIIMS NORCET or Central Hospital Exams", desc: "Secure prestigious permanent government nursing officer postings." },
+      { step: 7, title: "Advance to Nursing Superintendent or Overseas Practice", desc: "Lead hospital nursing divisions or clear NCLEX/OET for international roles." }
+    ]
+  },
+  {
+    id: "veterinary-doctor",
+    title: "Veterinary Doctor & Animal Surgeon (BVSc)",
+    category: "Medical",
+    shortDescription: "Diagnoses, treats, and performs surgeries on domestic pets, livestock, dairy animals, and wild animals in sanctuaries.",
+    whySuits: "Perfect for students with genuine passion for animal welfare, veterinary biology, surgical medicine, and zoological care.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology (PCB) with minimum 50% marks.",
+    streamMatch: ["science-pcb", "science-pcmb"],
+    requiredQualification: "BVSc & AH (Bachelor of Veterinary Science and Animal Husbandry)",
+    courseOptions: [
+      "BVSc & AH (5.5 Years including internship)",
+      "MVSc in Veterinary Surgery & Radiology",
+      "MVSc in Veterinary Medicine",
+      "MVSc in Wildlife Health & Management"
+    ],
+    courseDuration: "5.5 Years",
+    entranceExams: ["NEET-UG (All India Veterinary Quota 15% via VCI)", "State Veterinary Entrance Tests (RPVT, KEAM, etc.)"],
+    requiredSkills: ["Helping people", "Problem-solving", "Analytical thinking"],
+    favouriteSubjects: ["Biology", "Chemistry", "Physics"],
+    interests: ["Medical", "Science and Research"],
+    jobOpportunities: [
+      "Veterinary Surgeon at Animal Hospitals & Clinics",
+      "Government Veterinary Officer (Animal Husbandry Dept)",
+      "Wildlife Veterinarian at National Parks & Zoos",
+      "Dairy & Poultry Industry Medical Consultant"
+    ],
+    salaryFresher: "₹4.5 - ₹8.0 LPA (Indicative)",
+    salaryExperienced: "₹12.0 - ₹24.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Government veterinary officers enjoy Gazetted status; pet clinics in urban cities see booming revenues.",
+    futureScope: "High demand driven by explosive rise in pet adoption, dairy tech modernization, and wildlife conservation programs.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCB", desc: "Achieve strong scores in biology, genetics, and animal anatomy." },
+      { step: 2, title: "Clear NEET-UG / State Veterinary Entrance", desc: "Secure a seat in Veterinary Council of India (VCI) approved colleges." },
+      { step: 3, title: "Complete 4.5 Years BVSc & AH Coursework", desc: "Study veterinary pathology, animal nutrition, pharmacology, and surgery." },
+      { step: 4, title: "Complete 1-Year Clinical Veterinary Internship", desc: "Treat farm cattle, horses, companion dogs, cats, and birds." },
+      { step: 5, title: "Register with Veterinary Council of India (VCI)", desc: "Obtain statutory license to practice veterinary medicine and surgery." },
+      { step: 6, title: "Appear for State Veterinary Officer Exams or MVSc", desc: "Join government animal husbandry services or pursue surgical specialization." },
+      { step: 7, title: "Operate Pet Multispecialty Hospital or Wildlife Center", desc: "Provide dedicated medical care to companion pets and endangered fauna." }
+    ]
+  },
+  {
+    id: "medical-lab-technologist",
+    title: "Medical Laboratory Technologist (BMLT)",
+    category: "Healthcare",
+    shortDescription: "Conducts vital clinical tests, blood work, microbiological cultures, and biopsy analyses to assist doctors in diagnosing diseases.",
+    whySuits: "Suits detail-oriented students who like laboratory instruments, pathology investigations, and chemistry without direct patient bedside handling.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology (PCB).",
+    streamMatch: ["science-pcb", "science-pcmb"],
+    requiredQualification: "BMLT (Bachelor in Medical Laboratory Technology) or B.Sc MLT",
+    courseOptions: [
+      "B.Sc in Medical Laboratory Technology (B.Sc MLT)",
+      "BMLT (3 to 3.5 Years)",
+      "M.Sc in Medical Laboratory Technology / Clinical Pathology",
+      "Diploma in Medical Laboratory Technology (DMLT)"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["State Paramedical CETs", "CUET-UG", "Institutional Entrances"],
+    requiredSkills: ["Analytical thinking", "Problem-solving", "Computer knowledge"],
+    favouriteSubjects: ["Biology", "Chemistry"],
+    interests: ["Healthcare", "Science and Research"],
+    jobOpportunities: [
+      "Clinical Pathology Technologist",
+      "Molecular Diagnostics Specialist",
+      "Blood Bank Technical Officer",
+      "Diagnostic Lab Manager (Dr Lal PathLabs, SRL, Metropolis)"
+    ],
+    salaryFresher: "₹2.8 - ₹4.8 LPA (Indicative)",
+    salaryExperienced: "₹7.5 - ₹14.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Molecular diagnostics and genetic testing labs offer faster promotion trajectories.",
+    futureScope: "Continuous growth as evidence-based medicine and preventative health checkups expand exponentially across India.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with PCB", desc: "Build thorough knowledge of biological sciences and chemistry." },
+      { step: 2, title: "Enroll in BMLT / B.Sc MLT Course", desc: "Join a recognized paramedical college with attached clinical hospital labs." },
+      { step: 3, title: "Study Hematology, Biochemistry & Microbiology", desc: "Learn automated analyzers, blood grouping, PCR testing, and staining techniques." },
+      { step: 4, title: "Complete 6-Month Hospital Laboratory Internship", desc: "Process thousands of clinical diagnostic samples with precision." },
+      { step: 5, title: "Master Modern Automated Lab Equipment", desc: "Operate flow cytometers, automated biochemistry analyzers, and PCR machines." },
+      { step: 6, title: "Obtain State Paramedical Council Registration", desc: "Receive formal authorization as qualified medical laboratory technologist." },
+      { step: 7, title: "Join Hospital Pathology Teams or Diagnostic Chains", desc: "Manage laboratory operations and ensure rapid, accurate diagnostic test reports." }
+    ]
+  },
+  {
+    id: "radiologist",
+    title: "Radiologic & Imaging Technologist",
+    category: "Healthcare",
+    shortDescription: "Operates sophisticated diagnostic imaging machinery including MRI, CT scans, X-rays, and ultrasound to detect medical conditions.",
+    whySuits: "Great for students fascinated by the intersection of medical science, physics, advanced computer imaging, and healthcare diagnostics.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology or Mathematics (PCB/PCM).",
+    streamMatch: ["science-pcb", "science-pcmb", "science-pcm"],
+    requiredQualification: "B.Sc in Medical Imaging Technology (B.Sc MIT / BRIT)",
+    courseOptions: [
+      "B.Sc in Medical Radiologic Technology (B.Sc MRT)",
+      "B.Sc in Medical Imaging Technology (BMIT)",
+      "M.Sc in Medical Imaging Technology"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["State Paramedical CETs", "AIIMS Paramedical Entrance", "CUET-UG"],
+    requiredSkills: ["Computer knowledge", "Problem-solving", "Helping people", "Analytical thinking"],
+    favouriteSubjects: ["Physics", "Biology"],
+    interests: ["Healthcare", "Technology", "Medical"],
+    jobOpportunities: [
+      "MRI / CT Scan Technologist",
+      "Interventional Radiology Specialist",
+      "Nuclear Medicine Technologist",
+      "Applications Specialist for Imaging OEMs (GE, Siemens)"
+    ],
+    salaryFresher: "₹3.2 - ₹5.5 LPA (Indicative)",
+    salaryExperienced: "₹8.5 - ₹16.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Experienced MRI and CT technologists in diagnostic chains and super-specialty hospitals enjoy high demand.",
+    futureScope: "Continuous technological advancement with AI-assisted scanning, 3D medical imaging, and expanding diagnostic hospital networks.",
+    roadmap: [
+      { step: 1, title: "Finish 12th with PCB or PCM", desc: "Solidify knowledge in radiation physics, optics, and human anatomy." },
+      { step: 2, title: "Enroll in B.Sc Radiologic / Imaging Technology", desc: "Study radiation safety, radiographic techniques, and digital imaging protocols." },
+      { step: 3, title: "Learn Radiation Safety (AERB Guidelines)", desc: "Master radiation protection principles and quality assurance standards." },
+      { step: 4, title: "Complete Clinical Hospital Rotations", desc: "Perform digital X-rays, fluoroscopy, contrast CT scans, and MRI sequences." },
+      { step: 5, title: "Obtain AERB Certification / Registration", desc: "Fulfill regulatory standards mandated by Atomic Energy Regulatory Board." },
+      { step: 6, title: "Gain Specialization in High-Tesla MRI or CT", desc: "Operate high-resolution 3T MRI machines and multi-slice cardiac CT scanners." },
+      { step: 7, title: "Work in Super-Specialty Medical Centers", desc: "Deliver high-clarity diagnostic scans that guide critical surgical decisions." }
+    ]
+  },
+  {
+    id: "chartered-accountant",
+    title: "Chartered Accountant (CA)",
+    category: "Commerce",
+    shortDescription: "Audits financial statements, manages corporate taxation, provides strategic financial planning, and ensures statutory compliance.",
+    whySuits: "Perfect for students with high mathematical aptitude, analytical precision, discipline, and interest in business finances.",
+    eligibility: "Class 12 passed from any stream (Commerce with Mathematics preferred). Registration with ICAI.",
+    streamMatch: ["commerce-maths", "commerce", "science-pcm", "arts"],
+    requiredQualification: "Chartered Accountant certification from ICAI (Institute of Chartered Accountants of India)",
+    courseOptions: [
+      "CA Course (Foundation -> Intermediate -> 2-Year Articleship -> Final)",
+      "B.Com + CA (Combined simultaneously)",
+      "B.Com (Hons) in Accounting & Finance"
+    ],
+    courseDuration: "4 to 5 Years after Class 12",
+    entranceExams: ["CA Foundation Exam (conducted by ICAI)", "Direct Entry Scheme (for top graduates)"],
+    requiredSkills: ["Mathematics", "Analytical thinking", "Problem-solving", "Logical thinking"],
+    favouriteSubjects: ["Accountancy", "Mathematics", "Economics", "Business Studies"],
+    interests: ["Commerce", "Finance", "Business"],
+    jobOpportunities: [
+      "Statutory Auditor at Big 4 Accounting Firms (Deloitte, PwC, EY, KPMG)",
+      "Chief Financial Officer (CFO) / Finance Director",
+      "Corporate Taxation & GST Advisor",
+      "Independent Practicing Chartered Accountant"
+    ],
+    salaryFresher: "₹8.0 - ₹15.0 LPA (Indicative)",
+    salaryExperienced: "₹22.0 - ₹50.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. ICAI campus placement data shows strong compensation with consistent top packages for rank holders.",
+    futureScope: "Statutory monopoly on signing corporate balance sheets in India ensures evergreen prestige, stability, and executive leadership roles.",
+    roadmap: [
+      { step: 1, title: "Register for CA Foundation after 10th/12th", desc: "Enroll with ICAI and prepare for 4 core papers (Accounting, Law, Math/Stats, Economics)." },
+      { step: 2, title: "Clear CA Foundation Exam", desc: "Pass with minimum 40% in each paper and 50% aggregate." },
+      { step: 3, title: "Enroll in CA Intermediate & Clear Both Groups", desc: "Study corporate law, taxation, cost accounting, auditing, and financial management." },
+      { step: 4, title: "Complete ICITSS IT & Soft Skills Training", desc: "Undergo mandatory ICAI computer training and orientation program." },
+      { step: 5, title: "Complete 2 Years Mandatory Practical Articleship", desc: "Train under a practicing CA firm auditing corporate clients and filing tax returns." },
+      { step: 6, title: "Clear CA Final Examination", desc: "Crack the rigorous final group exams covering financial reporting and strategic management." },
+      { step: 7, title: "Become ICAI Member & Launch Career", desc: "Join Big 4, investment banks, multinationals, or start your independent CA firm." }
+    ]
+  },
+  {
+    id: "investment-banker",
+    title: "Investment Banker & Financial Analyst",
+    category: "Finance",
+    shortDescription: "Advises corporations on mergers, acquisitions (M&A), initial public offerings (IPOs), capital raising, and stock market investments.",
+    whySuits: "Suits high-energy, ambitious students who love financial markets, valuation modeling, economic trends, and deal-making.",
+    eligibility: "Class 12 with Mathematics (Commerce with Maths or Science PCM preferred).",
+    streamMatch: ["commerce-maths", "science-pcm", "commerce"],
+    requiredQualification: "B.Com / BBA in Finance / B.Tech, followed by top-tier MBA in Finance or CFA charter",
+    courseOptions: [
+      "B.Com (Hons) / BBA in Finance",
+      "B.Tech + MBA (Finance from IIMs)",
+      "CFA (Chartered Financial Analyst - US)",
+      "B.Sc in Finance / Financial Markets"
+    ],
+    courseDuration: "3 to 5 Years",
+    entranceExams: ["CUET-UG (for SRCC, St. Xavier's, DU)", "IPMAT (IIM Indore/Rohtak 5-yr Integrated)", "CAT (for IIMs MBA)"],
+    requiredSkills: ["Analytical thinking", "Mathematics", "Communication", "Logical thinking", "Problem-solving"],
+    favouriteSubjects: ["Economics", "Mathematics", "Accountancy", "Business Studies"],
+    interests: ["Finance", "Business", "Commerce"],
+    jobOpportunities: [
+      "M&A / Capital Markets Analyst",
+      "Equity Research Associate",
+      "Private Equity & Venture Capital Associate",
+      "Portfolio Fund Manager"
+    ],
+    salaryFresher: "₹9.0 - ₹20.0 LPA (Indicative)",
+    salaryExperienced: "₹30.0 - ₹75.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian investment banking compensation. Elite global banks (Goldman Sachs, Morgan Stanley, JP Morgan) pay top-bracket bonuses.",
+    futureScope: "India's booming equity markets, rapid startup ecosystem, and multi-billion-dollar corporate IPOs drive immense demand.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with Commerce+Maths or PCM", desc: "Build strong command of quantitative mathematics, economics, and business finance." },
+      { step: 2, title: "Enroll in Top Tier Finance / Commerce Degree", desc: "Target premier colleges (SRCC, NMIMS, Loyola, St. Xavier's) or engineering." },
+      { step: 3, title: "Master Financial Modeling & Excel", desc: "Learn discounted cash flow (DCF), LBO models, and valuation frameworks." },
+      { step: 4, title: "Clear CFA Level 1 Exam", desc: "Earn the globally recognized credential in portfolio management and ethics." },
+      { step: 5, title: "Intern with Investment Banks or Equity Funds", desc: "Build company pitch books, financial statement projections, and industry decks." },
+      { step: 6, title: "Pursue MBA from Top IIMs / Global B-School", desc: "Secure front-office campus recruitment at top bulge-bracket investment banks." },
+      { step: 7, title: "Lead Multi-Crore Deals & IPO Transactions", desc: "Advise enterprise leaders on capital structuring, mergers, and market listings." }
+    ]
+  },
+  {
+    id: "company-secretary",
+    title: "Company Secretary (CS)",
+    category: "Commerce",
+    shortDescription: "Acts as chief governance officer, guiding board of directors on corporate legal compliance, SEBI regulations, and company law.",
+    whySuits: "Suits students with keen interest in legal frameworks, corporate governance, corporate documentation, and board-level strategy.",
+    eligibility: "Class 12 passed in any stream (except fine arts). Registration with ICSI.",
+    streamMatch: ["commerce-maths", "commerce", "arts", "science-pcm"],
+    requiredQualification: "Company Secretary (CS) credential awarded by ICSI (Institute of Company Secretaries of India)",
+    courseOptions: [
+      "CS Course (CSEET -> Executive Programme -> Professional Programme)",
+      "Integrated B.Com LLB + CS",
+      "BBA LLB + CS Certification"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["CSEET (CS Executive Entrance Test - conducted by ICSI)"],
+    requiredSkills: ["Communication", "Analytical thinking", "Problem-solving", "Leadership"],
+    favouriteSubjects: ["Business Studies", "Economics", "History / Political Science", "Accountancy"],
+    interests: ["Commerce", "Business", "Government Jobs"],
+    jobOpportunities: [
+      "Corporate Secretary / Chief Compliance Officer",
+      "Legal & Regulatory Advisor",
+      "SEBI Compliance Specialist",
+      "Independent Governance Consultant"
+    ],
+    salaryFresher: "₹5.5 - ₹9.0 LPA (Indicative)",
+    salaryExperienced: "₹15.0 - ₹32.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Mandatory statutory requirement for listed companies under Indian Companies Act guarantees executive demand.",
+    futureScope: "Stringent corporate governance, ESG reporting, and SEBI regulations make the CS role indispensable for every listed company in India.",
+    roadmap: [
+      { step: 1, title: "Register for CSEET after 12th", desc: "Prepare for computer-based CS Executive Entrance Test covering legal aptitude and business communication." },
+      { step: 2, title: "Clear CSEET Exam", desc: "Qualify with minimum 40% in each subject and 50% aggregate." },
+      { step: 3, title: "Pass CS Executive Programme", desc: "Master company law, securities laws, tax laws, and commercial jurisprudence." },
+      { step: 4, title: "Complete Mandatory Practical Training", desc: "Undergo 21 months of executive training with a listed company or practicing CS." },
+      { step: 5, title: "Clear CS Professional Examination", desc: "Pass advanced modules on corporate restructuring, ethics, and secretarial audit." },
+      { step: 6, title: "Acquire ICSI Associate Membership (ACS)", desc: "Become an official Company Secretary entitled to sign compliance documents." },
+      { step: 7, title: "Work Directly with Corporate Board of Directors", desc: "Ensure company integrity, ethical governance, and flawless statutory compliance." }
+    ]
+  },
+  {
+    id: "cma-accountant",
+    title: "Certified Management Accountant (CMA)",
+    category: "Commerce",
+    shortDescription: "Specializes in cost management, industrial pricing strategy, profitability analysis, and operational cost audits.",
+    whySuits: "Ideal for students who like numbers, manufacturing processes, operational cost optimization, and strategic financial control.",
+    eligibility: "Class 12 passed from any stream. Registration with ICMAI.",
+    streamMatch: ["commerce-maths", "commerce", "science-pcm"],
+    requiredQualification: "CMA (Cost & Management Accountant) from ICMAI",
+    courseOptions: [
+      "CMA Course (Foundation -> Intermediate -> Final)",
+      "B.Com + CMA",
+      "BBA in Cost Accounting + CMA"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["CMA Foundation Examination (conducted by ICMAI)"],
+    requiredSkills: ["Mathematics", "Analytical thinking", "Problem-solving", "Logical thinking"],
+    favouriteSubjects: ["Accountancy", "Economics", "Mathematics", "Business Studies"],
+    interests: ["Commerce", "Finance", "Business"],
+    jobOpportunities: [
+      "Cost Controller & Pricing Analyst",
+      "Internal Cost Auditor",
+      "Financial Planning & Analysis (FP&A) Manager",
+      "Manufacturing Operations Financial Controller"
+    ],
+    salaryFresher: "₹6.0 - ₹10.0 LPA (Indicative)",
+    salaryExperienced: "₹16.0 - ₹30.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Mandatory cost audit provisions in manufacturing, pharma, and infrastructure drive sustained recruitment.",
+    futureScope: "Continuous demand across manufacturing, automotive, energy, and supply chain industries striving for cost efficiency.",
+    roadmap: [
+      { step: 1, title: "Enroll in CMA Foundation Course after 12th", desc: "Study basic accounting, business mathematics, economics, and business laws." },
+      { step: 2, title: "Clear CMA Foundation Exam", desc: "Secure qualifying scores to progress to Intermediate level." },
+      { step: 3, title: "Pass CMA Intermediate Both Groups", desc: "Study cost accounting, financial management, direct/indirect taxation, and company accounts." },
+      { step: 4, title: "Complete Mandatory Practical Training (15 Months)", desc: "Train in cost departments of manufacturing corporations or audit firms." },
+      { step: 5, title: "Clear CMA Final Examination", desc: "Master strategic cost management, corporate financial reporting, and cost audits." },
+      { step: 6, title: "Obtain Associate Membership of ICMAI", desc: "Become a qualified Cost and Management Accountant." },
+      { step: 7, title: "Lead Cost Strategy & Operational Profitability", desc: "Direct pricing, resource efficiency, and financial planning for major corporations." }
+    ]
+  },
+  {
+    id: "business-consultant",
+    title: "Management Consultant / MBA",
+    category: "Business",
+    shortDescription: "Helps enterprise CEOs and executive teams solve complex business challenges, enter new markets, and accelerate revenue growth.",
+    whySuits: "Suits natural leaders, structured strategic thinkers, and strong communicators who thrive on variety and fast-paced problem-solving.",
+    eligibility: "Bachelor's Degree in any discipline (B.Tech, BBA, B.Com, BA).",
+    streamMatch: ["commerce-maths", "science-pcm", "commerce", "arts", "science-pcmb"],
+    requiredQualification: "Bachelor's degree followed by top-tier MBA (IIMs, ISB, XLRI, FMS)",
+    courseOptions: [
+      "BBA / IPM (Integrated Programme in Management at IIMs)",
+      "B.Tech + MBA (Postgraduate)",
+      "B.Com (Hons) + MBA",
+      "Master of Business Administration (MBA / PGDM)"
+    ],
+    courseDuration: "3 Years UG + 2 Years MBA",
+    entranceExams: ["IPMAT (after 12th for 5-yr IIM program)", "CAT (Common Admission Test for IIMs)", "XAT", "GMAT"],
+    requiredSkills: ["Leadership", "Communication", "Problem-solving", "Analytical thinking", "Logical thinking"],
+    favouriteSubjects: ["Business Studies", "Economics", "English", "Mathematics"],
+    interests: ["Business", "Finance"],
+    jobOpportunities: [
+      "Strategy Consultant at MBB (McKinsey, BCG, Bain)",
+      "Management Consultant at Big 4 / Strategy& / Kearney",
+      "Corporate Strategy Manager",
+      "Operations Transformation Specialist"
+    ],
+    salaryFresher: "₹12.0 - ₹28.0 LPA (Indicative)",
+    salaryExperienced: "₹35.0 - ₹75.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian consulting compensation. Top IIM graduates recruited by global consulting firms command top campus compensation.",
+    futureScope: "High corporate demand as digital transformations, supply chain re-architectures, and AI disruptions require external strategic expertise.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with Academic Excellence", desc: "Excel in analytical reasoning, quantitative ability, and public speaking." },
+      { step: 2, title: "Pursue Undergrad Degree (B.Tech, BBA, B.Com)", desc: "Maintain top 10% academic standing and take campus leadership positions." },
+      { step: 3, title: "Crack CAT / IPMAT with 99+ Percentile", desc: "Gain admission into prestigious IIMs (Ahmedabad, Bangalore, Calcutta) or XLRI/FMS." },
+      { step: 4, title: "Master Case Studies & Structured Problem Solving", desc: "Practice frameworks (Issue Trees, MECE principle, market-entry models)." },
+      { step: 5, title: "Summer Internship with Consulting Firms", desc: "Solve real-world corporate strategy problems for Fortune 500 clients." },
+      { step: 6, title: "Crack Consulting Case Interviews", desc: "Clear rigorous case interviews and behavioral rounds during campus placements." },
+      { step: 7, title: "Advise CEOs on Strategic Transformations", desc: "Deliver actionable boardroom recommendations that redefine entire market sectors." }
+    ]
+  },
+  {
+    id: "digital-marketer",
+    title: "Digital Marketing Strategist & Brand Manager",
+    category: "Business",
+    shortDescription: "Drives customer acquisition, brand awareness, social media campaigns, SEO, and paid performance marketing for modern brands.",
+    whySuits: "Suits creative and analytical minds who love social media trends, viral storytelling, consumer psychology, and growth data.",
+    eligibility: "Class 12 in any stream (Commerce, Arts, or Science).",
+    streamMatch: ["commerce", "commerce-maths", "arts", "science-pcm", "science-pcb"],
+    requiredQualification: "BBA in Marketing, BMM (Mass Media), or B.Com, plus digital marketing certifications",
+    courseOptions: [
+      "BBA in Digital Marketing / Marketing Management",
+      "BA in Journalism & Mass Communication (BJMC)",
+      "B.Com with Marketing Specialization",
+      "Certifications: Google Ads, Meta Blueprint, HubSpot"
+    ],
+    courseDuration: "3 Years",
+    entranceExams: ["CUET-UG", "IPU CET", "Christ University Entrance", "Symbiosis SET"],
+    requiredSkills: ["Creativity", "Communication", "Analytical thinking", "Computer knowledge"],
+    favouriteSubjects: ["Business Studies", "English", "Economics", "Psychology"],
+    interests: ["Business", "Arts and Design", "Technology"],
+    jobOpportunities: [
+      "Performance Marketing Lead (Google/Meta Ads)",
+      "SEO & Content Marketing Strategist",
+      "Brand & Social Media Manager",
+      "Growth Hacker at Consumer D2C Startups"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹12.0 - ₹25.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Proven ability to scale return on ad spend (ROAS) and drive customer acquisition unlocks rapid salary hikes.",
+    futureScope: "Continuous explosive demand as every enterprise from local shops to multinational giants pivots advertising budgets online.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Develop keen interest in brand communication, consumer behavior, and online trends." },
+      { step: 2, title: "Pursue BBA, BMM, or B.Com Degree", desc: "Learn core marketing principles, market research, consumer psychology, and business basics." },
+      { step: 3, title: "Learn Core Digital Marketing Channels", desc: "Master SEO, Google Search Ads, Meta Performance marketing, and email funnels." },
+      { step: 4, title: "Master Analytics Tools (GA4, Looker Studio)", desc: "Learn to track conversions, analyze CAC, LTV, and customer user journeys." },
+      { step: 5, title: "Run Live Ad Campaigns & Manage Channels", desc: "Manage social pages, run micro-budget ad experiments, and build a measurable portfolio." },
+      { step: 6, title: "Intern with Digital Agencies or D2C Brands", desc: "Gain hands-on experience handling multi-lakh monthly digital advertising budgets." },
+      { step: 7, title: "Lead Growth Marketing & Brand Campaigns", desc: "Oversee digital acquisition budgets and build nationally recognized consumer brands." }
+    ]
+  },
+  {
+    id: "hr-manager",
+    title: "Human Resources (HR) Manager",
+    category: "Business",
+    shortDescription: "Recruits top talent, manages employee engagement, leads organizational culture, oversees payroll, and resolves workplace conflicts.",
+    whySuits: "Ideal for empathetic listeners with strong interpersonal skills, high emotional intelligence, and leadership potential.",
+    eligibility: "Class 12 in any stream (Commerce, Arts, or Science).",
+    streamMatch: ["commerce", "commerce-maths", "arts", "science-pcb", "science-pcm"],
+    requiredQualification: "BBA / B.Com / BA in Psychology, followed by MBA in Human Resource Management",
+    courseOptions: [
+      "BBA in Human Resource Management",
+      "BA in Psychology / Organizational Behavior",
+      "MBA in Human Resources (from TISS, XLRI, SCMHRD)",
+      "B.Com with HR specialization"
+    ],
+    courseDuration: "3 Years UG + 2 Years PG (MBA)",
+    entranceExams: ["CUET-UG", "CAT", "XAT (for XLRI)", "TISSNET / CUET-PG (for TISS Mumbai)"],
+    requiredSkills: ["Communication", "Leadership", "Helping people", "Problem-solving"],
+    favouriteSubjects: ["Business Studies", "Psychology", "English", "Economics"],
+    interests: ["Business", "Teaching"],
+    jobOpportunities: [
+      "Talent Acquisition & Recruitment Specialist",
+      "HR Business Partner (HRBP)",
+      "Learning & Development (L&D) Manager",
+      "Chief People Officer (CPO) / VP of HR"
+    ],
+    salaryFresher: "₹4.5 - ₹8.0 LPA (Indicative)",
+    salaryExperienced: "₹15.0 - ₹30.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Graduates of premier HR institutes like XLRI and TISS receive top-tier starting compensation.",
+    futureScope: "Continuous high demand as hybrid work, talent retention, diversity & inclusion, and employee wellbeing become strategic company priorities.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with Strong Interpersonal Skills", desc: "Participate in debates, student council leadership, and organizing school events." },
+      { step: 2, title: "Earn Undergrad Degree in BBA, B.Com, or Psychology", desc: "Understand human behavior, business operations, and organizational systems." },
+      { step: 3, title: "Prepare for Top MBA HR Entrances (CAT / XAT)", desc: "Target premier HR management institutions: XLRI Jamshedpur, TISS Mumbai, MDI Gurgaon." },
+      { step: 4, title: "Study People Analytics & Labor Laws", desc: "Learn payroll regulations, industrial dispute acts, and HRMS tools (Workday, Darwinbox)." },
+      { step: 5, title: "Complete Corporate HR Summer Internship", desc: "Manage campus recruitment drives, employee onboarding, and engagement initiatives." },
+      { step: 6, title: "Join as HR Associate / Management Trainee", desc: "Work closely with business leaders to align human capital with company goals." },
+      { step: 7, title: "Advance to Senior HR Business Partner (HRBP)", desc: "Shape company culture, leadership succession, and organizational transformation." }
+    ]
+  },
+  {
+    id: "supply-chain-manager",
+    title: "Supply Chain & Logistics Manager",
+    category: "Business",
+    shortDescription: "Oversees global procurement, warehouse operations, inventory control, shipping, and fast delivery of goods across borders.",
+    whySuits: "Great for organized, analytical thinkers who enjoy operations, logistics, optimization, and real-time coordination.",
+    eligibility: "Class 12 in any stream (Commerce or Science preferred).",
+    streamMatch: ["commerce-maths", "commerce", "science-pcm"],
+    requiredQualification: "BBA / B.Com / B.Tech, followed by MBA in Operations / Supply Chain",
+    courseOptions: [
+      "BBA in Logistics & Supply Chain Management",
+      "B.Tech in Industrial Engineering",
+      "MBA in Operations & Supply Chain Management",
+      "Certifications: CSCP (APICS), Six Sigma Green Belt"
+    ],
+    courseDuration: "3 Years UG + 2 Years PG",
+    entranceExams: ["CUET-UG", "CAT", "XAT", "SNAP"],
+    requiredSkills: ["Problem-solving", "Analytical thinking", "Leadership", "Logical thinking"],
+    favouriteSubjects: ["Business Studies", "Mathematics", "Economics"],
+    interests: ["Business", "Commerce", "Engineering"],
+    jobOpportunities: [
+      "Supply Chain Strategist",
+      "Logistics & Fulfillment Center Manager",
+      "Global Procurement Specialist",
+      "Inventory & Demand Planner"
+    ],
+    salaryFresher: "₹4.5 - ₹8.0 LPA (Indicative)",
+    salaryExperienced: "₹14.0 - ₹28.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. E-commerce boom (Amazon, Flipkart, Blinkit, Zepto) has elevated supply chain to a strategic executive role.",
+    futureScope: "Explosive growth driven by quick commerce, global supply chain near-shoring, and PM Gati Shakti national logistics initiatives.",
+    roadmap: [
+      { step: 1, title: "Finish 12th with Focus on Math & Commerce", desc: "Build good understanding of commerce principles, math, and logical problem solving." },
+      { step: 2, title: "Complete BBA in Supply Chain or B.Tech", desc: "Learn transportation economics, inventory modeling, warehouse automation, and operations." },
+      { step: 3, title: "Master ERP Systems & Analytics (SAP / Excel)", desc: "Learn enterprise resource planning (SAP SCM), supply chain tracking, and forecasting." },
+      { step: 4, title: "Earn Lean Six Sigma Certification", desc: "Understand operational waste reduction, root cause analysis, and quality control." },
+      { step: 5, title: "Intern with E-Commerce or Manufacturing Hubs", desc: "Work on warehouse fulfillment, vendor procurement, and route optimization." },
+      { step: 6, title: "Pursue MBA in Operations or Join as Trainee", desc: "Recruited by e-commerce leaders, FMCG giants, or third-party logistics firms." },
+      { step: 7, title: "Direct End-to-End Supply Chain Operations", desc: "Oversee multi-node distribution networks ensuring rapid and cost-effective deliveries." }
+    ]
+  },
+  {
+    id: "ui-ux-designer",
+    title: "UI/UX Product Designer",
+    category: "Design",
+    shortDescription: "Researches user needs, designs intuitive mobile app interfaces, creates interactive prototypes, and crafts delightful digital experiences.",
+    whySuits: "Perfect for students who balance visual aesthetics with empathy, human psychology, and technology.",
+    eligibility: "Class 12 in any stream (Arts, Science, or Commerce).",
+    streamMatch: ["arts", "science-pcm", "commerce", "commerce-maths", "science-pcb"],
+    requiredQualification: "B.Des (Bachelor of Design) or Bachelor in Fine Arts (BFA), or degree with strong UX portfolio",
+    courseOptions: [
+      "B.Des in Interaction Design / User Experience",
+      "B.Des in Communication Design (NID, IIT-UCEED)",
+      "B.Voc in Web Design & Digital Media",
+      "Google UX Design Professional Certificate"
+    ],
+    courseDuration: "4 Years (B.Des) / 3 Years",
+    entranceExams: ["UCEED (for IIT Bombay, IIT Delhi, IIT Guwahati)", "NID DAT (National Institute of Design)", "NIFT", "State Design Entrances"],
+    requiredSkills: ["Creativity", "Drawing and designing", "Problem-solving", "Computer knowledge", "Helping people"],
+    favouriteSubjects: ["Fine Arts", "Computer Science", "Psychology", "English"],
+    interests: ["Arts and Design", "Technology"],
+    jobOpportunities: [
+      "User Experience (UX) Researcher",
+      "User Interface (UI) Designer",
+      "Product Designer at Tech Companies",
+      "Design Systems Specialist"
+    ],
+    salaryFresher: "₹5.0 - ₹10.0 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹35.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian design compensation. Quality of your design portfolio (Figma case studies) matters far more than degrees alone.",
+    futureScope: "High demand as tech products succeed or fail based on user experience simplicity, accessibility, and intuitive interface design.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Build creative visual sensitivity, sketch concepts, and observe how everyday apps work." },
+      { step: 2, title: "Crack UCEED / NID DAT Design Entrances", desc: "Prepare design aptitude, visual creativity, spatial perception, and storytelling." },
+      { step: 3, title: "Pursue B.Des in Interaction / Communication Design", desc: "Study human-computer interaction (HCI), typography, wireframing, and user research." },
+      { step: 4, title: "Master Industry Design Tools (Figma)", desc: "Become an expert in Figma, auto-layout, design systems, and clickable prototyping." },
+      { step: 5, title: "Conduct Real User Research & Case Studies", desc: "Interview users, identify pain points, redesign existing apps, and write case studies." },
+      { step: 6, title: "Intern with Product Startups or Design Studios", desc: "Collaborate closely with software engineers and product managers." },
+      { step: 7, title: "Join Tech Unicorns as Product Designer", desc: "Shape consumer interfaces and design interactions used by millions." }
+    ]
+  },
+  {
+    id: "graphic-designer",
+    title: "Graphic & Visual Communication Designer",
+    category: "Design",
+    shortDescription: "Creates visual concepts, brand identities, marketing graphics, packaging, and digital illustrations that communicate ideas.",
+    whySuits: "Suits artistic students with an eye for color, typography, illustration, visual storytelling, and brand expression.",
+    eligibility: "Class 12 in any stream (Arts, Commerce, or Science).",
+    streamMatch: ["arts", "commerce", "science-pcm", "science-pcb"],
+    requiredQualification: "B.Des in Graphic Design, BFA (Bachelor of Fine Arts), or Visual Communication",
+    courseOptions: [
+      "B.Des in Graphic Design / Visual Communication",
+      "BFA in Applied Arts",
+      "B.Sc in Multimedia & Animation",
+      "Diploma in Graphic & Web Design"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["NID DAT", "UCEED", "NIFT Entrance Exam", "State Fine Arts Entrances"],
+    requiredSkills: ["Creativity", "Drawing and designing", "Computer knowledge", "Communication"],
+    favouriteSubjects: ["Fine Arts", "English", "Computer Science"],
+    interests: ["Arts and Design"],
+    jobOpportunities: [
+      "Brand Identity & Logo Designer",
+      "Visual Communication Specialist",
+      "Advertising Art Director",
+      "Packaging Designer for FMCG Brands"
+    ],
+    salaryFresher: "₹3.2 - ₹5.8 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹20.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Creative directors and studio owners with standout brand portfolios command premium rates.",
+    futureScope: "Continuous demand across advertising, brand merchandising, e-commerce, publishing, and digital content creation.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Develop sketching skills, study color theory, and build an early art portfolio." },
+      { step: 2, title: "Clear Design Entrance (NID / NIFT / BFA)", desc: "Secure admission in leading visual communication and applied art institutes." },
+      { step: 3, title: "Master Adobe Creative Suite & Vector Tools", desc: "Learn Illustrator, Photoshop, InDesign, and digital drawing tablets." },
+      { step: 4, title: "Study Typography, Layout & Branding", desc: "Understand grid systems, brand guidelines, packaging mockups, and print production." },
+      { step: 5, title: "Build an Online Creative Portfolio (Behance/Dribbble)", desc: "Showcase comprehensive brand identities, posters, editorial layouts, and packaging." },
+      { step: 6, title: "Intern with Creative Advertising Agencies", desc: "Work on real brand briefs, client revisions, and campaign visual identity." },
+      { step: 7, title: "Work as Senior Visual Designer or Art Director", desc: "Create memorable visual identities for famous brands and cultural campaigns." }
+    ]
+  },
+  {
+    id: "fashion-designer",
+    title: "Fashion & Apparel Designer",
+    category: "Design",
+    shortDescription: "Creates original clothing, footwear, accessories, and haute couture collections by sketching trends, sourcing fabrics, and styling.",
+    whySuits: "Suits students passionate about style, garments, textiles, color palettes, runway trends, and visual craftsmanship.",
+    eligibility: "Class 12 in any stream with minimum 50% aggregate.",
+    streamMatch: ["arts", "commerce", "science-pcm", "science-pcb"],
+    requiredQualification: "B.Des in Fashion Design from NIFT or equivalent design university",
+    courseOptions: [
+      "B.Des in Fashion Design (NIFT)",
+      "B.Des in Textile Design",
+      "B.Des in Knitwear / Accessory Design",
+      "B.F.Tech (Bachelor of Fashion Technology - requires PCM)"
+    ],
+    courseDuration: "4 Years",
+    entranceExams: ["NIFT Entrance Exam (CAT & GAT)", "NID DAT", "UCEED", "Pearl Academy Entrance"],
+    requiredSkills: ["Creativity", "Drawing and designing", "Communication"],
+    favouriteSubjects: ["Fine Arts", "English", "Business Studies"],
+    interests: ["Arts and Design", "Business"],
+    jobOpportunities: [
+      "Fashion Designer for Apparel Brands (Zara, FabIndia, Aditya Birla)",
+      "Costume Designer for Film & OTT Productions",
+      "Celebrity Fashion Stylist",
+      "Independent Couturier / Fashion Label Entrepreneur"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹24.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Renowned celebrity stylists and independent brand founders generate substantial revenues.",
+    futureScope: "Continuous evolution with sustainable fashion, ethical textiles, e-commerce retail fashion, and global export markets.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Develop drawing ability, observe street fashion, and explore garment silhouettes." },
+      { step: 2, title: "Crack NIFT Entrance Exam (CAT/GAT)", desc: "Secure admission into National Institute of Fashion Technology (NIFT)." },
+      { step: 3, title: "Complete 4 Years B.Des Fashion Curriculum", desc: "Learn pattern making, garment construction, draping, fashion illustration, and textiles." },
+      { step: 4, title: "Master Digital Fashion Tools (CLO 3D / Illustrator)", desc: "Create 3D digital garment simulations and digital CAD flats." },
+      { step: 5, title: "Complete Graduation Design Collection", desc: "Fabricate a cohesive 5-6 outfit runway collection displayed at graduation fashion show." },
+      { step: 6, title: "Intern with Established Designers or Retail Brands", desc: "Gain hands-on export house, studio cutting, and fashion week preparation experience." },
+      { step: 7, title: "Join Fashion Houses or Launch Label", desc: "Design seasonal collections for retail brands or establish your signature label." }
+    ]
+  },
+  {
+    id: "interior-designer",
+    title: "Interior Architect & Spatial Designer",
+    category: "Design",
+    shortDescription: "Plans, designs, and styles residential homes, corporate offices, luxury hotels, and commercial spaces for aesthetic beauty and function.",
+    whySuits: "Suits students who love architectural spaces, furniture aesthetics, lighting, room layouts, and transforming living spaces.",
+    eligibility: "Class 12 in any stream (Science/PCM preferred if pursuing B.Arch Interior).",
+    streamMatch: ["arts", "commerce", "science-pcm", "science-pcb"],
+    requiredQualification: "B.Des in Interior Design or B.Arch with Interior Specialization",
+    courseOptions: [
+      "B.Des in Interior & Spatial Design",
+      "B.Sc in Interior Design (3 Years)",
+      "B.Arch with Interior Architecture Focus",
+      "Diploma in Interior Design"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["NID DAT", "UCEED", "NATA (for architecture pathways)", "Institutional Entrances"],
+    requiredSkills: ["Drawing and designing", "Creativity", "Problem-solving", "Communication"],
+    favouriteSubjects: ["Fine Arts", "Mathematics", "Physics"],
+    interests: ["Arts and Design", "Engineering"],
+    jobOpportunities: [
+      "Residential Interior Designer",
+      "Corporate Office Workspace Consultant",
+      "Hospitality & Luxury Hotel Spatial Designer",
+      "Turnkey Interior Project Contractor"
+    ],
+    salaryFresher: "₹3.5 - ₹6.0 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹22.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Interior designers executing turnkey residential and commercial projects earn attractive commissions.",
+    futureScope: "High real estate construction boom, luxury residential demand, and smart modular home renovations ensure strong sustained demand.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Cultivate spatial perception, hand-sketching of rooms, and color harmony." },
+      { step: 2, title: "Enroll in B.Des in Interior Design", desc: "Study spatial ergonomics, materials, acoustics, building codes, and furniture design." },
+      { step: 3, title: "Master 3D Modeling & CAD (AutoCAD, SketchUp, 3ds Max)", desc: "Create photo-realistic 3D walkthroughs using V-Ray, Blender, and AutoCAD layouts." },
+      { step: 4, title: "Learn Material Sourcing & Lighting Design", desc: "Understand veneers, marble, false ceilings, electrical layouts, and mood lighting." },
+      { step: 5, title: "Site Supervision & Contractor Coordination", desc: "Gain on-site experience overseeing carpenters, electricians, and painters." },
+      { step: 6, title: "Intern with Interior Design Studios or Architects", desc: "Handle real client briefs, budget estimation, and material BOQ documents." },
+      { step: 7, title: "Launch Independent Interior Studio or Join Firm", desc: "Design breathtaking living spaces, luxury villas, and modern corporate headquarters." }
+    ]
+  },
+  {
+    id: "animator-vfx",
+    title: "3D Animator & VFX Artist",
+    category: "Design",
+    shortDescription: "Brings animated characters, 3D gaming assets, CGI visual effects, and cinematic scenes to life for movies, video games, and OTT shows.",
+    whySuits: "Suits imaginative students who love gaming graphics, anime, Marvel VFX, 3D modeling, and visual storytelling.",
+    eligibility: "Class 12 in any stream (Arts, Science, or Commerce).",
+    streamMatch: ["arts", "science-pcm", "commerce", "science-pcb"],
+    requiredQualification: "B.Des in Animation, B.Sc in Animation & VFX, or B.Voc in Digital Media",
+    courseOptions: [
+      "B.Des in Animation & Motion Graphics",
+      "B.Sc in Animation, VFX & Gaming",
+      "Diploma in 3D Animation & Visual Effects",
+      "Unreal Engine / Maya Professional Certifications"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["NID DAT", "UCEED", "State University Animation Entrances"],
+    requiredSkills: ["Creativity", "Drawing and designing", "Computer knowledge", "Problem-solving"],
+    favouriteSubjects: ["Fine Arts", "Computer Science", "Physics"],
+    interests: ["Arts and Design", "Technology"],
+    jobOpportunities: [
+      "3D Character Animator",
+      "VFX Compositor & Lighting Artist",
+      "Game Asset / Environment 3D Artist",
+      "Motion Graphics Designer for Media Houses"
+    ],
+    salaryFresher: "₹3.2 - ₹5.8 LPA (Indicative)",
+    salaryExperienced: "₹9.5 - ₹20.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Global VFX outsourcing to Indian studios (Technicolor, DNEG, MPC) offers world-class movie credit opportunities.",
+    futureScope: "Explosive growth driven by gaming industry expansion, OTT content visual effects, virtual production, and 3D architectural visualization.",
+    roadmap: [
+      { step: 1, title: "Finish 12th in Any Stream", desc: "Practice figure drawing, understand perspective, and study motion physics." },
+      { step: 2, title: "Enroll in B.Des Animation or B.Sc VFX", desc: "Learn the 12 principles of animation, storyboarding, cinematography, and rendering." },
+      { step: 3, title: "Master Industry Software (Maya, Blender, ZBrush)", desc: "Build 3D models, sculpt organic creatures, and learn character rigging." },
+      { step: 4, title: "Learn VFX & Compositing (Nuke, After Effects)", desc: "Master green-screen keying, CGI integration, particle dynamics, and lighting." },
+      { step: 5, title: "Explore Game Engines (Unreal Engine 5)", desc: "Create real-time cinematic sequences and interactive game environments." },
+      { step: 6, title: "Assemble a High-Impact Animation Showreel", desc: "A compelling 60-second video showreel of your best animated shots is your ticket to hiring." },
+      { step: 7, title: "Join Animation Studios or Gaming Companies", desc: "Work on international feature films, video games, or streaming entertainment." }
+    ]
+  },
+  {
+    id: "commercial-pilot",
+    title: "Commercial Airline Pilot",
+    category: "Engineering",
+    shortDescription: "Operates commercial passenger aircraft, navigating complex flight plans, bad weather, and ensuring passenger safety at 35,000 feet.",
+    whySuits: "Ideal for disciplined students passionate about flying, aviation mechanics, travel, quick decision-making, and high responsibility.",
+    eligibility: "Class 12 with Physics and Mathematics with minimum 50% marks. Class 1 Medical Fitness certificate from DGCA.",
+    streamMatch: ["science-pcm", "science-pcmb"],
+    requiredQualification: "Commercial Pilot License (CPL) issued by DGCA (Directorate General of Civil Aviation)",
+    courseOptions: [
+      "Cadet Pilot Programme (IndiGo / Air India / SpiceJet)",
+      "Flying Club CPL Training (IGRUA / National Flying Training Institutes)",
+      "B.Sc in Aviation + CPL Flight Training"
+    ],
+    courseDuration: "18 to 24 Months of Flight Training (200 Flying Hours)",
+    entranceExams: ["IGRUA Entrance Exam", "DGCA Air Regulatory CPL Theory Exams", "Airline Cadet Pilot Assessments"],
+    requiredSkills: ["Problem-solving", "Leadership", "Logical thinking", "Communication"],
+    favouriteSubjects: ["Physics", "Mathematics", "English"],
+    interests: ["Engineering", "Other fields"],
+    jobOpportunities: [
+      "First Officer (Co-Pilot) with Commercial Airlines",
+      "Captain / Commander (after accumulating flight hours)",
+      "Cargo Airline Pilot (Blue Dart, FedEx)",
+      "Flight Instructor at Flying Academies"
+    ],
+    salaryFresher: "₹15.0 - ₹25.0 LPA (Indicative)",
+    salaryExperienced: "₹40.0 - ₹90.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian aviation compensation. Senior Captains on wide-body international aircraft earn top compensation in Indian industry.",
+    futureScope: "Massive aviation boom; Indian airlines have ordered over 1,500 new aircraft, creating unprecedented pilot demand over the next 15 years.",
+    roadmap: [
+      { step: 1, title: "Clear 12th with Physics & Mathematics", desc: "Ensure strong math, physics, and fluent English language proficiency." },
+      { step: 2, title: "Pass DGCA Class 2 & Class 1 Medical Exam", desc: "Undergo comprehensive medical and vision examinations by DGCA empaneled doctors." },
+      { step: 3, title: "Clear DGCA Ground School Theory Exams", desc: "Pass Air Navigation, Aviation Meteorology, Air Regulations, and Technical General." },
+      { step: 4, title: "Join DGCA Approved Flying Training Academy (FTO)", desc: "Enroll in institutions like IGRUA or flying clubs in India or abroad." },
+      { step: 5, title: "Log 200 Hours of Flight Training & Solo Flights", desc: "Master single-engine, multi-engine aircraft, instrument flying, and night flying." },
+      { step: 6, title: "Obtain Commercial Pilot License (CPL) & Type Rating", desc: "Receive DGCA CPL and complete type rating on Airbus A320 or Boeing 737." },
+      { step: 7, title: "Join Airline as Junior First Officer", desc: "Fly passenger airliners across domestic and international routes." }
+    ]
+  },
+  {
+    id: "civil-services-ias",
+    title: "Civil Services Officer (IAS / IPS / IFS)",
+    category: "Government",
+    shortDescription: "Administers government districts, maintains law and order, shapes national public policy, and leads public welfare implementation.",
+    whySuits: "Suits patriotic, socially committed students who want to make a monumental positive impact on society with highest administrative authority.",
+    eligibility: "Bachelor's degree in any discipline from a recognized university. Minimum age 21 years.",
+    streamMatch: ["arts", "commerce", "science-pcm", "science-pcb", "commerce-maths", "science-pcmb"],
+    requiredQualification: "Graduation in any stream (BA, B.Com, B.Sc, B.Tech, MBBS) + Clearing UPSC Civil Services Examination",
+    courseOptions: [
+      "BA in Political Science / History / Public Administration",
+      "B.Tech in any engineering discipline (popular with aspirants)",
+      "B.Com / B.Sc in any field",
+      "Integrated UPSC Preparation alongside graduation"
+    ],
+    courseDuration: "3 to 4 Years Graduation + 1 to 2 Years Dedicated UPSC Prep",
+    entranceExams: ["UPSC Civil Services Examination (CSE) - Prelims, Mains, and Personality Test (Interview)"],
+    requiredSkills: ["Leadership", "Communication", "Problem-solving", "Analytical thinking", "Helping people"],
+    favouriteSubjects: ["History / Political Science", "Economics", "English", "Psychology"],
+    interests: ["Government Jobs", "Teaching", "Other fields"],
+    jobOpportunities: [
+      "District Magistrate (DM) / Collector (IAS)",
+      "Superintendent of Police (SP) / Commissioner (IPS)",
+      "Diplomat / Ambassador (Indian Foreign Service - IFS)",
+      "Ministry Secretary / Joint Secretary to Government of India"
+    ],
+    salaryFresher: "₹8.0 - ₹12.0 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹28.0 LPA (Indicative)",
+    salaryNotice: "Official Central Government Pay Matrix (Level 10 starting at ₹56,100 basic + DA, official bungalow, government vehicle, and staff).",
+    futureScope: "Supreme constitutional authority, immense societal respect, job security, and unparalleled power to uplift communities and govern India.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Develop daily habit of reading national newspapers (The Hindu / Indian Express) and general awareness." },
+      { step: 2, title: "Pursue Graduation Degree of Your Choice", desc: "Complete degree with strong understanding of your optional subject and general studies." },
+      { step: 3, title: "Master NCERT Books (Class 6 to 12)", desc: "Build rock-solid foundation in Indian History, Geography, Polity, and Economy." },
+      { step: 4, title: "Clear UPSC Prelims Examination", desc: "Pass General Studies Paper 1 and CSAT Paper 2 to qualify for the Mains stage." },
+      { step: 5, title: "Crack UPSC Mains Examination (9 Written Papers)", desc: "Score high in Essay, GS 1-4, and your chosen Optional Subject papers." },
+      { step: 6, title: "Excel in UPSC Personality Test (Interview)", desc: "Demonstrate integrity, mental alertness, balance of judgment, and leadership." },
+      { step: 7, title: "Undergo Training at LBSNAA Mussoorie", desc: "Receive administrative training and take charge of district governance across India." }
+    ]
+  },
+  {
+    id: "defense-officer",
+    title: "Defense Officer (Army / Navy / Air Force)",
+    category: "Government",
+    shortDescription: "Commands military troops, flies supersonic fighter jets, operates naval warships, and protects national sovereignty.",
+    whySuits: "Suits courageous, physically fit, disciplined students with strong leadership instincts and patriotic dedication to the armed forces.",
+    eligibility: "Class 12 passed (Army: Any stream; Air Force & Navy: Physics and Mathematics required). Unmarried, medical fitness.",
+    streamMatch: ["science-pcm", "science-pcmb", "arts", "commerce"],
+    requiredQualification: "Clear NDA Exam (after 12th) or CDS Exam (after graduation), followed by 3-4 years training at National Defence Academy",
+    courseOptions: [
+      "NDA (National Defence Academy, Khadakwasla, Pune)",
+      "Indian Naval Academy (INA) Cadet Entry",
+      "Air Force Academy (AFA)",
+      "CDS (Combined Defence Services - after graduation)"
+    ],
+    courseDuration: "3 Years NDA + 1 Year IMA/AFA/INA Finishing Academy",
+    entranceExams: ["NDA Examination (conducted twice yearly by UPSC)", "SSB (Services Selection Board) 5-Day Interview"],
+    requiredSkills: ["Leadership", "Problem-solving", "Communication"],
+    favouriteSubjects: ["Physics", "Mathematics", "History / Political Science", "English"],
+    interests: ["Government Jobs", "Engineering"],
+    jobOpportunities: [
+      "Lieutenant in Indian Army",
+      "Sub-Lieutenant in Indian Navy",
+      "Flying Officer in Indian Air Force",
+      "Special Forces Commander / Defense Attache"
+    ],
+    salaryFresher: "₹8.0 - ₹14.0 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹32.0 LPA (Indicative)",
+    salaryNotice: "Central Pay Commission Level 10 (~₹56,100 basic + Military Service Pay ₹15,500 + DA + high-altitude/flying allowances, defense healthcare & housing).",
+    futureScope: "Unrivaled honor, adventurous lifestyle, global defense diplomacy, leadership command, and lifelong respect and pensions.",
+    roadmap: [
+      { step: 1, title: "Complete 12th (PCM for Navy/Air Force, Any Stream for Army)", desc: "Maintain high physical fitness (running, pushups) and strong general knowledge." },
+      { step: 2, title: "Clear UPSC NDA Written Examination", desc: "Pass Mathematics paper (300 marks) and General Ability Test (600 marks)." },
+      { step: 3, title: "Clear 5-Day SSB (Services Selection Board) Interview", desc: "Undergo psychological tests, group obstacle tasks (GTO), and personal interview." },
+      { step: 4, title: "Pass Rigorous Military Medical Board Exam", desc: "Ensure 100% medical, visual, and physical fitness standards mandated by Armed Forces." },
+      { step: 5, title: "Complete 3 Years Cadet Training at NDA Pune", desc: "Undergo military drill, weapons handling, outdoor survival, and earn a B.A. or B.Sc." },
+      { step: 6, title: "Complete 1 Year Advanced Training at IMA / AFA / INA", desc: "Master advanced military tactics, naval navigation, or supersonic flight maneuvers." },
+      { step: 7, title: "Get Commissioned as an Officer in Armed Forces", desc: "Lead military troops with valor, duty, and protect the territorial integrity of India." }
+    ]
+  },
+  {
+    id: "bank-po",
+    title: "Banking Probationary Officer (SBI / IBPS PO)",
+    category: "Government",
+    shortDescription: "Manages branch banking operations, customer loans, credit underwriting, forex, and retail banking services for major public sector banks.",
+    whySuits: "Suits students seeking a secure, prestigious financial career with structured promotions, steady salary, and pan-India banking presence.",
+    eligibility: "Bachelor's degree in any discipline from a recognized university. Age 20 to 30 years.",
+    streamMatch: ["commerce-maths", "commerce", "arts", "science-pcm", "science-pcb"],
+    requiredQualification: "Graduation in any stream (B.Com, BBA, B.Sc, B.Tech, BA) + IBPS PO or SBI PO Exam",
+    courseOptions: [
+      "B.Com in Banking & Insurance",
+      "BBA in Banking & Finance",
+      "Any Bachelor's Degree + Banking Exam Coaching",
+      "Post Graduate Diploma in Banking & Finance (PGDBF)"
+    ],
+    courseDuration: "3 Years Graduation + 6-12 Months Banking Prep",
+    entranceExams: ["SBI PO Examination", "IBPS PO Examination", "RBI Grade B Exam"],
+    requiredSkills: ["Mathematics", "Logical thinking", "Problem-solving", "Communication"],
+    favouriteSubjects: ["Mathematics", "Economics", "Accountancy", "English"],
+    interests: ["Government Jobs", "Finance", "Commerce"],
+    jobOpportunities: [
+      "Assistant Manager / Probationary Officer at SBI / PNB / Bank of Baroda",
+      "Credit Appraisal Officer",
+      "Branch Chief Manager",
+      "RBI Grade B Officer (via direct RBI exam)"
+    ],
+    salaryFresher: "₹6.5 - ₹9.5 LPA (Indicative)",
+    salaryExperienced: "₹14.0 - ₹24.0 LPA (Indicative)",
+    salaryNotice: "Realistic public sector banking compensation. Includes basic pay, dearness allowance, leased accommodation (HRA), medical cover, and low-interest staff loans.",
+    futureScope: "Evergreen financial stability, strong corporate ladder leading to General Manager / Executive Director positions in Indian public sector banks.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Strengthen quantitative math skills, mental arithmetic, and reading speed." },
+      { step: 2, title: "Earn Bachelor's Degree in Any Discipline", desc: "Focus on commerce, economics, or engineering while keeping high academic standing." },
+      { step: 3, title: "Prepare for Banking Exams (Quantitative, Reasoning, English)", desc: "Practice timed mocks for Data Interpretation, Logical Puzzles, and General Awareness." },
+      { step: 4, title: "Clear Bank PO Preliminary Examination", desc: "Score above cutoff in 60-minute speed test across English, Quant, and Reasoning." },
+      { step: 5, title: "Clear Bank PO Mains Examination & Descriptive Test", desc: "Pass in-depth tests covering Financial Awareness, Data Analysis, and essay writing." },
+      { step: 6, title: "Excel in Group Discussion & Personal Interview", desc: "Demonstrate knowledge of monetary policy, banking products, and financial inclusion." },
+      { step: 7, title: "Complete 1-2 Year Probation & Become Branch Manager", desc: "Manage branch lending, financial growth, and lead banking teams." }
+    ]
+  },
+  {
+    id: "corporate-lawyer",
+    title: "Corporate Lawyer & Legal Advisor",
+    category: "Arts",
+    shortDescription: "Drafts commercial contracts, advises enterprises on mergers, corporate regulations, intellectual property, and represents clients in courts.",
+    whySuits: "Suits articulate students with strong debate, reading, analytical reasoning, argumentative logic, and negotiation skills.",
+    eligibility: "Class 12 passed in any stream (Arts, Commerce, or Science) with minimum 45-50% marks.",
+    streamMatch: ["arts", "commerce", "commerce-maths", "science-pcm", "science-pcb"],
+    requiredQualification: "5-Year Integrated Law Degree (BA LLB / BBA LLB) from National Law Universities (NLUs)",
+    courseOptions: [
+      "BA LLB (Honours) - 5 Years",
+      "BBA LLB (Honours) - 5 Years",
+      "B.Com LLB (Honours) - 5 Years",
+      "3-Year LLB (after completing graduation)"
+    ],
+    courseDuration: "5 Years after 12th",
+    entranceExams: ["CLAT (Common Law Admission Test for 24 NLUs)", "AILET (for NLU Delhi)", "SLAT (Symbiosis Law)", "LSAT-India"],
+    requiredSkills: ["Communication", "Analytical thinking", "Problem-solving", "Leadership", "Logical thinking"],
+    favouriteSubjects: ["History / Political Science", "English", "Economics", "Business Studies"],
+    interests: ["Arts and Design", "Business", "Government Jobs"],
+    jobOpportunities: [
+      "Associate at Tier-1 Law Firms (Shardul Amarchand, AZB, Trilegal, Cyril Amarchand)",
+      "In-House Corporate Legal Counsel",
+      "Litigation Advocate in High Courts / Supreme Court",
+      "Judicial Magistrate (via State Judicial Services Exam)"
+    ],
+    salaryFresher: "₹8.0 - ₹16.0 LPA (Indicative)",
+    salaryExperienced: "₹22.0 - ₹55.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian legal compensation. Top NLU graduates joining Tier-1 law firms start at ₹14-18 LPA; top partners earn substantial compensation.",
+    futureScope: "High corporate demand driven by complex business regulations, international cross-border investments, tech privacy laws, and IP rights.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream with High English Focus", desc: "Develop rapid reading comprehension, critical analysis, and vocabulary." },
+      { step: 2, title: "Crack CLAT or AILET Entrance Exam", desc: "Secure a top rank to gain admission into elite National Law Universities (NLSIU, NALSAR, etc.)." },
+      { step: 3, title: "Complete 5-Year Integrated BA LLB / BBA LLB", desc: "Study Constitutional Law, Contracts, Corporate Law, IPR, Criminal Law, and Jurisprudence." },
+      { step: 4, title: "Participate in National & International Moot Courts", desc: "Hone courtroom argumentation, legal research (Manupatra / SCC Online), and legal drafting." },
+      { step: 5, title: "Complete Internships with Law Firms & Senior Advocates", desc: "Intern every semester with corporate law firms, trial courts, and judicial clerks." },
+      { step: 6, title: "Clear All India Bar Examination (AIBE)", desc: "Enroll with the State Bar Council and obtain Certificate of Practice as an Advocate." },
+      { step: 7, title: "Join Tier-1 Law Firm or Corporate Legal Department", desc: "Structure complex acquisitions, draft multi-million-dollar agreements, and advise clients." }
+    ]
+  },
+  {
+    id: "school-teacher",
+    title: "Secondary & Higher Secondary Educator",
+    category: "Teaching",
+    shortDescription: "Educates young minds, develops lesson curricula, inspires academic curiosity, and shapes the moral and intellectual foundation of youth.",
+    whySuits: "Perfect for patient, inspiring individuals with deep subject passion who enjoy mentoring children and contributing to nation building.",
+    eligibility: "Class 12 with good marks, followed by Bachelor's and B.Ed degree.",
+    streamMatch: ["arts", "science-pcm", "science-pcb", "commerce", "commerce-maths"],
+    requiredQualification: "Bachelor's / Master's degree in teaching subject + B.Ed (Bachelor of Education)",
+    courseOptions: [
+      "Integrated 4-Year B.A. B.Ed / B.Sc. B.Ed",
+      "B.Sc / B.A. / B.Com (3 Years) followed by B.Ed (2 Years)",
+      "Master's Degree (M.Sc / M.A.) for Post Graduate Teacher (PGT) status"
+    ],
+    courseDuration: "4 to 5 Years",
+    entranceExams: ["CTET (Central Teacher Eligibility Test)", "State TETs (UPTET, REET, MahaTET)", "Kendriya Vidyalaya (KVS / NVS) Recruitment Exams"],
+    requiredSkills: ["Teaching", "Communication", "Helping people", "Leadership"],
+    favouriteSubjects: ["English", "Mathematics", "Biology", "Physics", "History / Political Science"],
+    interests: ["Teaching", "Government Jobs"],
+    jobOpportunities: [
+      "Trained Graduate Teacher (TGT) in Central / State Govt Schools (KVS, Navodaya)",
+      "Post Graduate Teacher (PGT) for Class 11-12",
+      "Educator in International Baccalaureate (IB) / Cambridge Schools",
+      "School Vice Principal / Academic Coordinator"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹8.0 - ₹16.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian teaching compensation. Government teachers in KVS/NVS receive 7th Pay Commission scales (~₹55,000+/month) with vacations and benefits.",
+    futureScope: "Continuous societal necessity; implementation of National Education Policy (NEP) creates millions of positions for qualified pedagogical teachers.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with Your Favorite Academic Stream", desc: "Cultivate mastery over chosen subjects (Sciences, Humanities, or Commerce)." },
+      { step: 2, title: "Pursue Bachelor's Degree in Teaching Discipline", desc: "Complete B.Sc, B.A., or Integrated 4-Year B.Ed program with pedagogical training." },
+      { step: 3, title: "Earn Bachelor of Education (B.Ed) Degree", desc: "Learn classroom management, educational psychology, teaching aids, and assessment design." },
+      { step: 4, title: "Clear CTET (Paper 1 & Paper 2)", desc: "Qualify central teacher certification with lifetime validity." },
+      { step: 5, title: "Complete Master's Degree (M.Sc / M.A.) for PGT Posts", desc: "Gain eligibility to teach higher secondary classes (11th and 12th standard)." },
+      { step: 6, title: "Appear for KVS, NVS, or State PGT Recruitment", desc: "Secure permanent government school faculty appointment or top private school role." },
+      { step: 7, title: "Inspire Future Generations of Students", desc: "Shape curious young minds and guide students toward meaningful careers." }
+    ]
+  },
+  {
+    id: "university-professor",
+    title: "University Professor & Academician",
+    category: "Teaching",
+    shortDescription: "Conducts advanced academic research, publishes scholarly papers, delivers university lectures, and mentors PhD doctoral candidates.",
+    whySuits: "Suits intellectually curious, scholarly thinkers who love deep research, university campuses, writing papers, and higher education.",
+    eligibility: "Master's degree in relevant discipline with minimum 55% marks + UGC-NET / CSIR-NET qualification.",
+    streamMatch: ["arts", "science-pcm", "science-pcb", "commerce-maths", "commerce"],
+    requiredQualification: "Master's Degree + UGC NET / CSIR NET + Ph.D (Doctorate of Philosophy)",
+    courseOptions: [
+      "Undergraduate Degree (3-4 Years)",
+      "Postgraduate Master's Degree (2 Years)",
+      "Ph.D (Doctor of Philosophy - 3 to 5 Years)"
+    ],
+    courseDuration: "8 to 10 Years (including Master's and Ph.D)",
+    entranceExams: ["UGC NET / JRF (Humanities, Commerce, Sciences)", "CSIR NET (Natural Sciences)", "GATE (for Engineering faculty)"],
+    requiredSkills: ["Teaching", "Analytical thinking", "Communication", "Problem-solving"],
+    favouriteSubjects: ["History / Political Science", "English", "Economics", "Physics", "Chemistry"],
+    interests: ["Teaching", "Science and Research"],
+    jobOpportunities: [
+      "Assistant Professor at Central / State Universities (DU, JNU, BHU)",
+      "Faculty at IITs, NITs, and IIMs",
+      "Principal Investigator for Funded Research Grants",
+      "Dean / University Academic Administrator"
+    ],
+    salaryFresher: "₹7.5 - ₹12.0 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹32.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. UGC 7th Pay Commission Level 10 starting salary (~₹75,000+/month) plus research allowances and campus housing.",
+    futureScope: "High prestige, intellectual autonomy, sabbatical leaves, and expanding university campuses under national higher education initiatives.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with Academic Distinction", desc: "Pursue deep reading and develop strong analytical writing capabilities." },
+      { step: 2, title: "Earn Bachelor's Degree with First Class Honors", desc: "Maintain top academic GPA and explore research literature." },
+      { step: 3, title: "Complete Master's Degree (M.A. / M.Sc / M.Com / M.Tech)", desc: "Specialize deeply in your chosen academic discipline and write a master's thesis." },
+      { step: 4, title: "Qualify UGC NET / JRF Examination", desc: "Secure Junior Research Fellowship (JRF) providing monthly stipend for doctoral studies." },
+      { step: 5, title: "Enroll in Ph.D Program & Publish Research Papers", desc: "Conduct original research, publish in peer-reviewed journals, and defend thesis." },
+      { step: 6, title: "Apply for Assistant Professor Postings", desc: "Appear before university selection committees at central universities, IITs, or NITs." },
+      { step: 7, title: "Attain Full Professorship & Guide Research", desc: "Lead departmental research, write academic books, and mentor the next generation of scholars." }
+    ]
+  },
+  {
+    id: "research-scientist",
+    title: "Scientific Research Scientist (ISRO / DRDO / CSIR)",
+    category: "Research",
+    shortDescription: "Conducts scientific experiments, invents breakthrough technologies, discovers scientific principles, and authors peer-reviewed papers.",
+    whySuits: "Perfect for students with insatiable curiosity about how nature and technology work, who love experiments and scientific innovation.",
+    eligibility: "Class 12 in Science (PCM / PCB / PCMB).",
+    streamMatch: ["science-pcm", "science-pcb", "science-pcmb"],
+    requiredQualification: "B.Tech / M.Sc / Ph.D in Physics, Chemistry, Material Science, or Engineering",
+    courseOptions: [
+      "BS-MS Dual Degree at IISER / IISc Bangalore (5 Years)",
+      "B.Tech followed by M.Tech / Ph.D",
+      "B.Sc + M.Sc + Ph.D in Pure Sciences"
+    ],
+    courseDuration: "5 to 8 Years",
+    entranceExams: ["IAT (IISER Aptitude Test)", "JEE Advanced (for IISc Bangalore)", "GATE", "CSIR-NET JRF", "ISRO Centralised Recruitment Board (ICRB)"],
+    requiredSkills: ["Analytical thinking", "Problem-solving", "Logical thinking", "Mathematics"],
+    favouriteSubjects: ["Physics", "Chemistry", "Mathematics", "Biology"],
+    interests: ["Science and Research", "Engineering"],
+    jobOpportunities: [
+      "Scientist/Engineer 'SC' at ISRO (Space Applications)",
+      "Defense Scientist at DRDO (Defense Systems)",
+      "Research Scientist at CSIR National Laboratories (NPL, NCL, etc.)",
+      "Industrial R&D Scientist at Global Tech Corporations"
+    ],
+    salaryFresher: "₹8.0 - ₹14.0 LPA (Indicative)",
+    salaryExperienced: "₹18.0 - ₹35.0 LPA (Indicative)",
+    salaryNotice: "Official Government of India Scientist Level 10 Pay scales. Opportunity to contribute to historic national missions (Chandrayaan, Gaganyaan).",
+    futureScope: "Strategic national investments in quantum computing, green hydrogen, aerospace materials, and nuclear energy ensure high demand.",
+    roadmap: [
+      { step: 1, title: "Complete 12th Science (PCM/PCMB) with Top Percentile", desc: "Develop rigorous conceptual grasp of physics, chemical bonding, and calculus." },
+      { step: 2, title: "Target Premier Science Institutes (IISc / IISER / NISER)", desc: "Crack IAT, NEST, or JEE Advanced to join 5-Year BS-MS Dual Degree programs." },
+      { step: 3, title: "Perform Advanced Laboratory Research", desc: "Work in experimental optics, nanotechnology, materials chemistry, or quantum physics." },
+      { step: 4, title: "Publish Scientific Papers in International Journals", desc: "Author research contributions in recognized peer-reviewed publications." },
+      { step: 5, title: "Clear ISRO ICRB or DRDO Scientist Entrance", desc: "Qualify technical examinations and interview boards for national lab recruitment." },
+      { step: 6, title: "Complete Ph.D or Specialized Research Fellowship", desc: "Gain doctoral depth in specialized fields like satellite payload design or stealth materials." },
+      { step: 7, title: "Lead Mission-Critical National Scientific Projects", desc: "Pioneer cutting-edge technologies that propel India's scientific leadership." }
+    ]
+  },
+  {
+    id: "biotechnologist",
+    title: "Biotechnologist & Genetic Researcher",
+    category: "Science",
+    shortDescription: "Applies cellular and genetic engineering to develop advanced vaccines, gene therapies, drought-resistant crops, and biofuels.",
+    whySuits: "Suits students fascinated by DNA, CRISPR gene editing, microbiology, medical therapeutics, and sustainable agricultural biology.",
+    eligibility: "Class 12 with Physics, Chemistry, and Biology or Mathematics (PCB / PCMB / PCM).",
+    streamMatch: ["science-pcb", "science-pcmb", "science-pcm"],
+    requiredQualification: "B.Tech in Biotechnology or B.Sc in Biotechnology / Genetics, followed by M.Tech / M.Sc",
+    courseOptions: [
+      "B.Tech in Biotechnology (4 Years)",
+      "B.Sc (Hons) in Biotechnology / Genetics / Microbiology",
+      "Integrated M.Tech in Bioengineering",
+      "M.Sc in Molecular Biology & Biotechnology"
+    ],
+    courseDuration: "3 to 4 Years UG + 2 Years PG",
+    entranceExams: ["JEE Main (for B.Tech Biotech)", "CUET-UG", "GAT-B (Graduate Aptitude Test - Biotechnology for Master's)"],
+    requiredSkills: ["Analytical thinking", "Problem-solving", "Computer knowledge"],
+    favouriteSubjects: ["Biology", "Chemistry"],
+    interests: ["Science and Research", "Medical", "Healthcare"],
+    jobOpportunities: [
+      "Genetic Engineering Research Scientist",
+      "Bioprocess & Vaccine Formulation Specialist (Serum Institute, Bharat Biotech)",
+      "Agricultural Biotech Scientist",
+      "Bioinformatics & Genomic Data Analyst"
+    ],
+    salaryFresher: "₹3.8 - ₹6.8 LPA (Indicative)",
+    salaryExperienced: "₹12.0 - ₹24.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Bio-pharma and genome sequencing companies offer attractive career pathways for skilled molecular scientists.",
+    futureScope: "High growth in mRNA vaccines, CRISPR therapeutics, synthetic biology, and climate-smart agriculture across India's $150B bio-economy vision.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with Biology and Chemistry", desc: "Master cell biology, genetics, chemical kinetics, and molecular mechanisms." },
+      { step: 2, title: "Pursue B.Tech or B.Sc in Biotechnology", desc: "Study genetic engineering, immunology, bioprocess engineering, and bioinformatics." },
+      { step: 3, title: "Master Molecular Lab Techniques", desc: "Learn PCR amplification, gel electrophoresis, Western blotting, and recombinant DNA." },
+      { step: 4, title: "Learn Bioinformatics & Computational Tools", desc: "Use Python and BLAST tools to analyze DNA sequences, protein folding, and genomic data." },
+      { step: 5, title: "Intern at Biopharma Companies or Research Institutes", desc: "Train at institutes like CCMB, NII, Biocon, or Serum Institute of India." },
+      { step: 6, title: "Crack GAT-B / CSIR-NET for Advanced Research", desc: "Pursue specialized postgraduate degree in genetic therapies or biomanufacturing." },
+      { step: 7, title: "Develop Life-Saving Biotherapeutics & Green Solutions", desc: "Work on vaccines, diagnostic kits, and novel biological medicines." }
+    ]
+  },
+  {
+    id: "environmental-scientist",
+    title: "Environmental Scientist & Sustainability Specialist",
+    category: "Science",
+    shortDescription: "Studies ecological health, assesses pollution, advises companies on carbon neutrality, and designs climate adaptation solutions.",
+    whySuits: "Suits students passionate about nature conservation, combating climate change, green energy, and sustainable development.",
+    eligibility: "Class 12 with Science (PCB / PCM / PCMB).",
+    streamMatch: ["science-pcb", "science-pcmb", "science-pcm"],
+    requiredQualification: "B.Sc / B.Tech in Environmental Science / Engineering, followed by M.Sc / M.Tech",
+    courseOptions: [
+      "B.Sc in Environmental Science",
+      "B.Tech in Environmental Engineering",
+      "M.Sc in Climate Change & Sustainability Studies",
+      "Post Graduate Diploma in Environmental Management"
+    ],
+    courseDuration: "3 to 4 Years",
+    entranceExams: ["CUET-UG", "JEE Main (for Environmental Engineering)", "GATE (for M.Tech)"],
+    requiredSkills: ["Problem-solving", "Analytical thinking", "Communication", "Helping people"],
+    favouriteSubjects: ["Biology", "Chemistry", "Physics"],
+    interests: ["Science and Research", "Government Jobs"],
+    jobOpportunities: [
+      "Corporate ESG (Environmental, Social, Governance) Specialist",
+      "Environmental Impact Assessment (EIA) Consultant",
+      "Pollution Control Board Scientist (CPCB / SPCB)",
+      "Climate Risk & Carbon Credit Analyst"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹11.0 - ₹22.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. Corporate mandates for ESG disclosure (BRSR by SEBI) have sharply increased compensation for sustainability analysts.",
+    futureScope: "High global priority; net-zero carbon pledges by 2070, renewable transition, and environmental clearances make sustainability experts indispensable.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Science", desc: "Build thorough knowledge of ecological cycles, environmental chemistry, and physics." },
+      { step: 2, title: "Pursue B.Sc / B.Tech in Environmental Science/Engineering", desc: "Study waste management, hydrology, environmental law, and air pollution control." },
+      { step: 3, title: "Master Environmental Impact Assessment (EIA)", desc: "Learn to evaluate the environmental footprint of highways, dams, and industrial factories." },
+      { step: 4, title: "Learn GIS & Remote Sensing Tools (ArcGIS / QGIS)", desc: "Analyze satellite imagery of forest cover, groundwater depletion, and urban heat islands." },
+      { step: 5, title: "Intern with Environmental Consultancies or NGOs", desc: "Participate in river rejuvenation, industrial effluent auditing, and carbon accounting." },
+      { step: 6, title: "Clear State Pollution Control Board Exams or Join Corporates", desc: "Enforce environmental compliance or join multinational ESG advisory practices." },
+      { step: 7, title: "Guide Organizations toward Carbon Neutrality", desc: "Implement circular economy principles and protect ecological ecosystems." }
+    ]
+  },
+  {
+    id: "psychologist",
+    title: "Clinical Psychologist & Mental Health Counselor",
+    category: "Healthcare",
+    shortDescription: "Evaluates psychological health, provides psychotherapy, counsels students and families, and helps individuals overcome emotional challenges.",
+    whySuits: "Perfect for compassionate, patient listeners with high empathy, emotional intuition, and deep interest in human thoughts and behavior.",
+    eligibility: "Class 12 in any stream (Psychology as an elective is beneficial).",
+    streamMatch: ["arts", "science-pcb", "commerce", "science-pcm"],
+    requiredQualification: "BA / B.Sc in Psychology, followed by MA / M.Sc and RCI-recognized M.Phil / Psy.D in Clinical Psychology",
+    courseOptions: [
+      "BA / B.Sc in Psychology (3 to 4 Years)",
+      "MA / M.Sc in Applied / Clinical Psychology (2 Years)",
+      "M.Phil in Clinical Psychology (RCI recognized - 2 Years)",
+      "Diploma in Guidance & Counseling"
+    ],
+    courseDuration: "3 Yrs UG + 2 Yrs PG + 2 Yrs M.Phil / Psy.D (Clinical license)",
+    entranceExams: ["CUET-UG", "CUET-PG", "NIMHANS Clinical Psychology Entrance", "CIP Ranchi Entrance Exam"],
+    requiredSkills: ["Helping people", "Communication", "Problem-solving", "Analytical thinking"],
+    favouriteSubjects: ["Psychology", "English", "Biology"],
+    interests: ["Healthcare", "Teaching", "Arts and Design"],
+    jobOpportunities: [
+      "Licensed Clinical Psychologist in Hospitals / Psychiatric Centers",
+      "School & College Student Counselor",
+      "Corporate Employee Wellbeing Specialist",
+      "Private Practice Psychotherapist"
+    ],
+    salaryFresher: "₹3.5 - ₹6.5 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹22.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian compensation. RCI-licensed clinical psychologists and corporate mental wellness consultants earn strong independent fees.",
+    futureScope: "Significant societal de-stigmatization of mental health in India; schools, universities, and IT corporations are mandating on-campus counselors.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Read introductory books on human psychology, cognition, and emotional development." },
+      { step: 2, title: "Earn BA or B.Sc in Psychology", desc: "Study developmental psychology, cognitive theories, psychometrics, and research methods." },
+      { step: 3, title: "Complete MA / M.Sc in Clinical or Counseling Psychology", desc: "Gain thorough understanding of psychopathology, diagnostic criteria (DSM-5), and therapies." },
+      { step: 4, title: "Complete Supervised Clinical Internships", desc: "Conduct psychological evaluations and case histories under licensed psychiatrists." },
+      { step: 5, title: "Pursue RCI-Approved M.Phil in Clinical Psychology", desc: "Enroll in premier institutes like NIMHANS, CIP, or LGBRIMH to earn your official RCI license." },
+      { step: 6, title: "Register with Rehabilitation Council of India (RCI)", desc: "Receive statutory legal license to practice as a certified Clinical Psychologist." },
+      { step: 7, title: "Provide Psychotherapy & Foster Mental Wellbeing", desc: "Help individuals navigate trauma, anxiety, and depression to lead fulfilling lives." }
+    ]
+  },
+  {
+    id: "journalist-media",
+    title: "Journalist, News Editor & Media Reporter",
+    category: "Arts",
+    shortDescription: "Investigates breaking stories, interviews public figures, writes news articles, reports from the field, and produces documentary media.",
+    whySuits: "Suits fearless, inquisitive students with a passion for current affairs, storytelling, investigative reporting, and public communication.",
+    eligibility: "Class 12 in any stream (Arts, Commerce, or Science) with good English or regional language proficiency.",
+    streamMatch: ["arts", "commerce", "science-pcm", "science-pcb"],
+    requiredQualification: "BJMC (Bachelor of Journalism and Mass Communication) or BA in Journalism",
+    courseOptions: [
+      "BJMC (Bachelor of Journalism and Mass Communication - 3 Years)",
+      "BA in Journalism & Digital Media",
+      "PG Diploma in Journalism from IIMC / ACJ (Premier institutes)",
+      "MA in Mass Communication"
+    ],
+    courseDuration: "3 Years UG (or 1 Year PG Diploma)",
+    entranceExams: ["CUET-UG", "IIMC Entrance Exam (Indian Institute of Mass Communication)", "ACJ Entrance Exam", "Symbiosis SET"],
+    requiredSkills: ["Communication", "Creativity", "Analytical thinking", "Leadership"],
+    favouriteSubjects: ["English", "History / Political Science", "Economics"],
+    interests: ["Arts and Design", "Government Jobs"],
+    jobOpportunities: [
+      "Broadcast Television Reporter / News Anchor",
+      "Digital News Investigative Journalist",
+      "Editor / Foreign Correspondent",
+      "Podcast Producer & Media Content Strategist"
+    ],
+    salaryFresher: "₹3.2 - ₹6.0 LPA (Indicative)",
+    salaryExperienced: "₹10.0 - ₹24.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian media compensation. Senior investigative reporters, digital news anchors, and bureau chiefs earn attractive packages.",
+    futureScope: "Continuous digital transformation; rapid growth of digital newsrooms, video essays, podcasts, data journalism, and investigative platforms.",
+    roadmap: [
+      { step: 1, title: "Complete 12th in Any Stream", desc: "Read quality newspapers, follow world news, and practice clear, concise news writing." },
+      { step: 2, title: "Pursue BJMC or BA in Journalism", desc: "Study reporting techniques, media ethics, broadcast production, and media laws." },
+      { step: 3, title: "Target Premier Institutes (IIMC / ACJ Chennai)", desc: "Clear national entrance for India's gold-standard postgraduate journalism diplomas." },
+      { step: 4, title: "Master Digital Journalism & Fact-Checking Tools", desc: "Learn mobile journalism (MoJo), video editing (Premiere Pro), and OSINT verification." },
+      { step: 5, title: "Intern with National Newsrooms & Field Bureaus", desc: "Cover local beats, write bylined news stories, and shadow senior correspondents." },
+      { step: 6, title: "Build a Diverse Reporting Portfolio", desc: "Publish investigative articles, ground reports, and video packages." },
+      { step: 7, title: "Work as Special Correspondent or Digital News Lead", desc: "Hold power to account and inform millions of citizens with truthful reporting." }
+    ]
+  },
+  {
+    id: "actuary",
+    title: "Actuary & Risk Mathematician",
+    category: "Finance",
+    shortDescription: "Applies advanced probability, statistics, and financial theory to calculate insurance risks, future pension liabilities, and financial forecasts.",
+    whySuits: "Perfect for students with extraordinary mathematical talent, statistical discipline, and analytical problem-solving skills.",
+    eligibility: "Class 12 with high marks in Mathematics (Commerce with Maths or Science PCM).",
+    streamMatch: ["commerce-maths", "science-pcm"],
+    requiredQualification: "Actuarial Science certification from IAI (Institute of Actuaries of India) or IFoA (UK)",
+    courseOptions: [
+      "B.Sc in Actuarial Science / Statistics / Mathematics",
+      "B.Com with Actuarial Papers",
+      "Actuarial Examinations by IAI (13 rigorous professional exams)"
+    ],
+    courseDuration: "3 to 6 Years alongside graduation",
+    entranceExams: ["ACET (Actuarial Common Entrance Test conducted by IAI)", "CUET-UG for B.Sc Statistics"],
+    requiredSkills: ["Mathematics", "Analytical thinking", "Problem-solving", "Logical thinking"],
+    favouriteSubjects: ["Mathematics", "Economics", "Accountancy"],
+    interests: ["Finance", "Commerce", "Science and Research"],
+    jobOpportunities: [
+      "Life / Health Insurance Pricing Actuary",
+      "Pension & Employee Benefits Consultant",
+      "Enterprise Risk Management Specialist",
+      "Investment Banking Quantitative Modeler"
+    ],
+    salaryFresher: "₹7.0 - ₹14.0 LPA (Indicative)",
+    salaryExperienced: "₹25.0 - ₹60.0 LPA (Indicative)",
+    salaryNotice: "Realistic Indian actuarial compensation. Fully credentialed Fellows of the Institute of Actuaries of India (FIAI) command elite salary packages.",
+    futureScope: "High global scarcity; mandatory requirement for life, general, and health insurance companies ensures continuous top-tier compensation.",
+    roadmap: [
+      { step: 1, title: "Complete 12th with 90%+ in Mathematics", desc: "Develop exceptional mastery in probability, calculus, and mathematical statistics." },
+      { step: 2, title: "Clear ACET Entrance Exam", desc: "Pass Actuarial Common Entrance Test conducted by Institute of Actuaries of India (IAI)." },
+      { step: 3, title: "Pursue B.Sc in Statistics, Mathematics, or Economics", desc: "Enroll in premier analytical colleges while simultaneously clearing professional actuary papers." },
+      { step: 4, title: "Clear Core Mathematical & Statistical Papers (CS1, CS2, CM1, CM2)", desc: "Clear the first 4-6 actuarial examination papers with rigorous preparation." },
+      { step: 5, title: "Intern with Insurance Companies or Actuarial Consultancies", desc: "Work with actuarial teams at HDFC Life, LIC, Swiss Re, or Milliman." },
+      { step: 6, title: "Clear Advanced Specialty Papers (CP & SP series)", desc: "Attain Associate (AIAI) and ultimately Fellow (FIAI) credential status." },
+      { step: 7, title: "Become Chief Actuary or Chief Risk Officer", desc: "Determine multi-thousand-crore insurance reserves and financial solvency." }
+    ]
+  }
+];
+
+// Verify we have at least 40
+console.log(`Generated ${careers.length} career profiles.`);
+
+// Output JS bundle
+const jsContent = `/**
+ * CareerConnect Portal - 100% Offline Career Profiles Database
+ * Contains ${careers.length} comprehensive, realistic profiles tailored for Indian 10th-12th school students.
+ */
+const CAREERS_DATA = ${JSON.stringify(careers, null, 2)};
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = CAREERS_DATA;
+}
+`;
+
+fs.writeFileSync(path.join(__dirname, 'js', 'careers-data.js'), jsContent, 'utf8');
+fs.writeFileSync(path.join(__dirname, 'data', 'careers.json'), JSON.stringify(careers, null, 2), 'utf8');
+console.log("Successfully wrote js/careers-data.js and data/careers.json");
