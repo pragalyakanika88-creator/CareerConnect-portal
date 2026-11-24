@@ -24,8 +24,8 @@
         </div>
       </div>
 
-      <nav>
-        <ul class="nav-menu">
+      <nav class="nav-wrapper" id="nav-wrapper">
+        <ul class="nav-menu" id="nav-menu">
           <li><a href="#" class="nav-link active" data-view="home">Home</a></li>
           <li><a href="#" class="nav-link" data-view="wizard">Career Journey</a></li>
           <li><a href="#" class="nav-link" data-view="recommendations">Recommendations</a></li>
@@ -37,11 +37,20 @@
         </ul>
       </nav>
 
-      <div class="nav-offline-badge" title="Running 100% locally. Zero internet connection required.">
-        <span class="offline-dot"></span>
-        <span>100% Offline</span>
+      <div class="nav-actions-group">
+        <div class="nav-offline-badge" title="Running 100% locally. Zero internet connection required.">
+          <span class="offline-dot"></span>
+          <span class="offline-text">100% Offline</span>
+        </div>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false" onclick="App.toggleMobileNav()">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
     </div>
+    <!-- Backdrop overlay for mobile drawer -->
+    <div class="nav-backdrop" id="nav-backdrop" onclick="App.closeMobileNav()"></div>
   </header>
 
   <!-- Main View Container -->

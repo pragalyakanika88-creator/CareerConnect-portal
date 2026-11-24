@@ -66,6 +66,9 @@ const App = (function () {
   function navigateTo(viewName) {
     currentView = viewName;
 
+    // Close mobile nav drawer if open
+    closeMobileNav();
+
     // Update active view
     Object.keys(views).forEach(key => {
       if (views[key]) {
@@ -1132,6 +1135,43 @@ You can ask me any question or click any of the suggestion chips below!`);
     }, 3200);
   }
 
+  // MOBILE NAVIGATION CONTROLLER
+  function toggleMobileNav() {
+    const navWrapper = document.getElementById('nav-wrapper');
+    if (!navWrapper) return;
+    if (navWrapper.classList.contains('is-open')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  }
+
+  function openMobileNav() {
+    const navWrapper = document.getElementById('nav-wrapper');
+    const backdrop = document.getElementById('nav-backdrop');
+    const toggleBtn = document.getElementById('hamburger-btn');
+    if (navWrapper) navWrapper.classList.add('is-open');
+    if (backdrop) backdrop.classList.add('is-open');
+    if (toggleBtn) {
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    }
+    document.body.classList.add('nav-open-lock');
+  }
+
+  function closeMobileNav() {
+    const navWrapper = document.getElementById('nav-wrapper');
+    const backdrop = document.getElementById('nav-backdrop');
+    const toggleBtn = document.getElementById('hamburger-btn');
+    if (navWrapper) navWrapper.classList.remove('is-open');
+    if (backdrop) backdrop.classList.remove('is-open');
+    if (toggleBtn) {
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+    document.body.classList.remove('nav-open-lock');
+  }
+
   // Event Listeners setup
   function setupEventListeners() {
     // Top Nav clicks
@@ -1143,9 +1183,19 @@ You can ask me any question or click any of the suggestion chips below!`);
       });
     });
 
-    // Close modal on escape key
+    // Close modal & mobile nav on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCareerDetails();
+      if (e.key === 'Escape') {
+        closeCareerDetails();
+        closeMobileNav();
+      }
+    });
+
+    // Close mobile nav when resizing to desktop/tablet
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        closeMobileNav();
+      }
     });
 
     // Close modal on overlay click
@@ -1195,7 +1245,10 @@ You can ask me any question or click any of the suggestion chips below!`);
     renderComparisonView,
     printReport,
     askAssistantQuery,
-    submitAssistantMessage
+    submitAssistantMessage,
+    toggleMobileNav,
+    openMobileNav,
+    closeMobileNav
   };
 })();
 

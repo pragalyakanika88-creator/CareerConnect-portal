@@ -75,25 +75,30 @@ const CareerComparison = (function () {
     ];
 
     let html = `
-      <div class="comparison-grid">
-        <div class="comparison-header">
-          <div class="comparison-col col-feature">Feature / Dimension</div>
-          <div class="comparison-col col-c1">
-            <div class="compare-title-block">
-              <h3>${c1.title}</h3>
-              <p class="text-muted">${c1.shortDescription}</p>
-              <button class="btn btn-sm btn-outline-primary" onclick="App.openCareerDetails('${c1.id}')">View Details</button>
+      <div class="comparison-scroll-hint">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <span>Swipe horizontally to compare both careers side-by-side</span>
+      </div>
+      <div class="comparison-scroll-wrapper">
+        <div class="comparison-grid">
+          <div class="comparison-header">
+            <div class="comparison-col col-feature">Feature / Dimension</div>
+            <div class="comparison-col col-c1">
+              <div class="compare-title-block">
+                <h3>${c1.title}</h3>
+                <p class="text-muted">${c1.shortDescription}</p>
+                <button class="btn btn-sm btn-outline-primary" onclick="App.openCareerDetails('${c1.id}')">View Details</button>
+              </div>
+            </div>
+            <div class="comparison-col col-c2">
+              <div class="compare-title-block">
+                <h3>${c2.title}</h3>
+                <p class="text-muted">${c2.shortDescription}</p>
+                <button class="btn btn-sm btn-outline-primary" onclick="App.openCareerDetails('${c2.id}')">View Details</button>
+              </div>
             </div>
           </div>
-          <div class="comparison-col col-c2">
-            <div class="compare-title-block">
-              <h3>${c2.title}</h3>
-              <p class="text-muted">${c2.shortDescription}</p>
-              <button class="btn btn-sm btn-outline-primary" onclick="App.openCareerDetails('${c2.id}')">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="comparison-body">
+          <div class="comparison-body">
     `;
 
     comparisonRows.forEach(row => {
@@ -107,6 +112,7 @@ const CareerComparison = (function () {
     });
 
     html += `
+          </div>
         </div>
       </div>
       <p class="salary-disclaimer text-center mt-3 text-muted">
